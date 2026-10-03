@@ -315,7 +315,12 @@ function SpeakerCanvas({
   );
 }
 
-export function InteractiveSpeaker() {
+type Props = {
+  className?: string;
+  variant?: "hero" | "section";
+};
+
+export function InteractiveSpeaker({ className = "", variant = "section" }: Props) {
   const { playing, blocked, turnOn, turnOff } = useAmbientAudio("/audio/rain.mp3");
   const reducedMotion = useSyncExternalStore(subscribeReduced, getReduced, () => false);
   const mobile = useSyncExternalStore(subscribeMobile, getMobile, () => true);
@@ -334,9 +339,14 @@ export function InteractiveSpeaker() {
     setCursorHint(c ?? "play");
   }, []);
 
+  const sizeClass =
+    variant === "hero"
+      ? "min-h-[240px] md:min-h-[300px] lg:min-h-[340px]"
+      : "min-h-[min(52vh,480px)] lg:min-h-[min(58vh,560px)]";
+
   return (
     <div
-      className="relative min-h-[min(52vh,480px)] w-full lg:min-h-[min(58vh,560px)]"
+      className={`relative w-full ${sizeClass} ${className}`}
       data-cursor={cursorHint}
     >
       <SpeakerCanvas

@@ -2,111 +2,93 @@
 
 import Link from "next/link";
 import type { Project } from "@/content/projects";
-import { ProjectImage } from "@/components/work/ProjectImage";
+import { LEGACY_MOBILE } from "@/lib/project-media";
+import { ProjectMediaFrame } from "@/components/work/ProjectMediaFrame";
+
+function resolveDesktop(project: Project) {
+  return project.desktopImage ?? project.image;
+}
+
+function resolveMobile(project: Project) {
+  if (project.mobileImage) return project.mobileImage;
+  const legacy = project.gallery?.find((g) => g.includes(LEGACY_MOBILE)) ?? project.gallery?.[0];
+  return legacy;
+}
 
 function ProjectTitle({ project }: { project: Project }) {
-  const title = project.name;
-  if (project.href) {
-    return (
-      <Link
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:opacity-75"
-      >
-        {title}
-      </Link>
-    );
-  }
-  return title;
-}
-
-function ProjectMeta({ project }: { project: Project }) {
+  if (!project.href) return project.name;
   return (
-    <>
-      <h3 className="text-[clamp(1.35rem,2.2vw,2.5rem)] font-semibold leading-tight tracking-[-0.03em]">
-        <ProjectTitle project={project} />
-      </h3>
-      <p className="mt-1 text-[10px] tracking-[0.32em] text-zinc-500 uppercase">{project.type}</p>
-      <p className="mt-2 max-w-md text-sm text-zinc-500">
-        {project.proofLine ?? project.outcome ?? project.description}
-      </p>
-    </>
-  );
-}
-
-function Visual({ project, className = "" }: { project: Project; className?: string }) {
-  const src = project.image;
-  if (!src) return null;
-  const imageMax =
-    project.slug === "our-shopee"
-      ? "max-h-[min(48vh,580px)]"
-      : "max-h-[min(42vh,520px)]";
-  return (
-    <div
-      data-cursor="project"
-      className={`group relative overflow-hidden rounded-sm ${className}`}
+    <Link
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:opacity-75"
     >
-      <ProjectImage src={src} alt={project.imageAlt} className={`${imageMax} object-cover object-top`} />
-    </div>
+      {project.name}
+    </Link>
   );
 }
 
-function VariantA({ project }: { project: Project }) {
-  return (
-    <article className="grid gap-5 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-end md:gap-8">
-      <ProjectMeta project={project} />
-      <Visual project={project} />
-    </article>
-  );
-}
+function FeaturedProject({ project }: { project: Project }) {
+  const desktop = resolveDesktop(project);
+  const mobile = resolveMobile(project);
+  const proofTags = project.highlights?.slice(0, 3) ?? project.proof?.slice(0, 3);
 
-function VariantB({ project }: { project: Project }) {
   return (
-    <article className="space-y-4">
-      <Visual project={project} />
-      <ProjectMeta project={project} />
-    </article>
-  );
-}
-
-function VariantC({ project }: { project: Project }) {
-  return (
-    <article className="grid gap-5 md:grid-cols-2 md:items-center md:gap-10">
-      <Visual project={project} className="md:order-2" />
-      <div className="md:order-1">
-        <ProjectMeta project={project} />
+    <article className="max-h-none min-h-0 md:max-h-[72svh] md:min-h-[52svh]">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
+          <ProjectTitle project={project} />
+        </h3>
+        <p className="text-[10px] tracking-[0.32em] text-zinc-500 uppercase">{project.type}</p>
       </div>
+
+      <div className="relative mt-4 md:mt-5" data-cursor="project">
+        <ProjectMediaFrame
+          src={desktop}
+          alt={`${project.imageAlt} — desktop`}
+          fallbackLabel={project.name}
+          variant="desktop"
+          className="max-h-[min(38vh,420px)] rounded-sm"
+        />
+        <div className="absolute right-2 bottom-2 w-[22%] min-w-[88px] max-w-[150px] md:right-4 md:bottom-4 md:w-[20%]">
+          <ProjectMediaFrame
+            src={mobile}
+            alt={`${project.imageAlt} — mobile`}
+            fallbackLabel={`${project.name} app`}
+            variant="mobile"
+            className="max-h-[min(28vh,320px)]"
+          />
+        </div>
+      </div>
+
+      <p className="mt-3 max-w-lg text-sm text-zinc-500">
+        {project.proofLine ?? project.outcome}
+      </p>
+      {proofTags?.length ? (
+        <p className="mt-2 text-[10px] tracking-[0.22em] text-zinc-600 uppercase">
+          {proofTags.join(" · ")}
+        </p>
+      ) : null}
     </article>
   );
 }
-
-const layoutBySlug: Record<string, "a" | "b" | "c"> = {
-  viacation: "a",
-  "our-shopee": "b",
-  "indore-nursery": "b",
-  "sg11-fantasy": "c",
-  "the-laundry-house": "c",
-};
 
 export function FeaturedWork({ projects }: { projects: Project[] }) {
   return (
-    <section className="border-b border-white/10 py-[70px] md:py-[90px]">
+    <section className="border-b border-white/10 py-12 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.04em]">
+        <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.04em]">
           THINGS WE&apos;VE BUILT.
         </h2>
-        <div className="mt-8 space-y-[50px] md:mt-10 md:space-y-[72px]">
-          {projects.map((project) => {
-            const variant = layoutBySlug[project.slug] ?? "a";
-            if (variant === "b") return <VariantB key={project.slug} project={project} />;
-            if (variant === "c") return <VariantC key={project.slug} project={project} />;
-            return <VariantA key={project.slug} project={project} />;
-          })}
+        <div className="mt-8 space-y-10 md:space-y-12">
+          {projects.map((project) => (
+            <FeaturedProject key={project.slug} project={project} />
+          ))}
         </div>
         <Link
           href="/work"
-          className="mt-10 inline-block text-[10px] tracking-[0.3em] text-zinc-500 hover:text-white"
+          className="mt-8 inline-block text-[10px] tracking-[0.3em] text-zinc-500 hover:text-white"
         >
           VIEW ALL WORK →
         </Link>
