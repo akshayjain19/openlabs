@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { site } from "@/content/site";
 import { whatsAppLink, cn } from "@/lib/utils";
@@ -10,13 +10,28 @@ import { whatsAppLink, cn } from "@/lib/utils";
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#070707]/80 backdrop-blur-sm">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300",
+        scrolled
+          ? "border-white/15 bg-[#070707]/95 backdrop-blur-md"
+          : "border-white/10 bg-[#070707]/70 backdrop-blur-sm",
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-8">
         <Link
           href="/"
-          className="text-sm font-semibold tracking-[0.35em] text-white md:text-base"
+          className="text-sm font-bold tracking-[0.35em] text-white md:text-base"
           onClick={() => setOpen(false)}
         >
           {site.name}

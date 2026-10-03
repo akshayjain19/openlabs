@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { experienceCompanies } from "@/content/site";
+import { experienceCompanies } from "@/content/experience";
 import { whatsAppLink } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -22,16 +22,14 @@ export default function AboutPage() {
           <div className="space-y-6 text-sm leading-relaxed text-zinc-400 md:text-base">
             <p>
               OpenLabs exists for businesses that need technology to actually move the business
-              forward — not slide decks, not endless discovery, not a template storefront.
+              forward.
             </p>
             <p>
-              We sit between business problem, product thinking, design, engineering, AI, and
-              automation. The team is intentionally small: product-minded engineers who can own
-              outcomes end to end.
+              We sit between: business problem, product thinking, design, engineering, AI,
+              automation.
             </p>
             <p>
-              We work remotely with founders and operators globally — location agnostic by design,
-              aligned time zones when it matters, async when it doesn&apos;t.
+              We are location agnostic and work with founders and teams wherever they are.
             </p>
           </div>
           <div className="relative min-h-[280px] overflow-hidden border border-white/10 bg-[#0a0a0a] p-8">

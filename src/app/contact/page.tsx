@@ -29,7 +29,7 @@ export default function ContactPage() {
             data-magnetic
             className="mt-10 inline-flex border border-white bg-white px-6 py-3 text-xs font-medium tracking-[0.2em] text-black hover:bg-zinc-200"
           >
-            WHATSAPP US
+            WHATSAPP US →
           </Link>
           <p className="mt-4 text-sm text-zinc-500">{site.whatsapp.display}</p>
         </div>

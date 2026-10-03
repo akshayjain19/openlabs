@@ -4,7 +4,18 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { whatWeBuild } from "@/content/site";
 
-export function WhatWeBuildList() {
+const visuals = [
+  "grid-cols-6 gap-1",
+  "grid-cols-3 gap-2",
+  "grid-cols-4 gap-1",
+  "grid-cols-2 gap-3",
+  "grid-cols-5 gap-1",
+  "grid-cols-3 gap-2",
+  "grid-cols-6 gap-1",
+  "grid-cols-4 gap-2",
+];
+
+export function CapabilityList() {
   const [active, setActive] = useState(0);
   const item = whatWeBuild[active];
 
@@ -27,14 +38,16 @@ export function WhatWeBuildList() {
               <li key={row.num}>
                 <button
                   type="button"
-                  className="group flex w-full items-baseline gap-6 py-5 text-left md:py-6"
+                  className="group flex w-full items-baseline gap-6 py-5 text-left md:py-7"
                   onMouseEnter={() => setActive(index)}
                   onFocus={() => setActive(index)}
                 >
                   <span className="text-xs tracking-[0.2em] text-zinc-600">{row.num}</span>
                   <span
-                    className={`text-xl font-medium tracking-tight transition-colors md:text-3xl ${
-                      active === index ? "text-white" : "text-zinc-500 group-hover:text-zinc-200"
+                    className={`text-2xl font-semibold tracking-tight transition-all duration-300 md:text-4xl ${
+                      active === index
+                        ? "translate-x-1 text-white"
+                        : "text-zinc-600 group-hover:text-zinc-300"
                     }`}
                   >
                     {row.label}
@@ -44,26 +57,33 @@ export function WhatWeBuildList() {
             ))}
           </ul>
 
-          <div className="relative min-h-[220px] border border-white/10 bg-[#0c0c0c] p-8 md:min-h-[320px]">
+          <div className="relative min-h-[260px] border border-white/10 bg-[#0a0a0a] p-8 md:min-h-[360px]">
             <motion.p
               key={item.num}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="text-sm leading-relaxed text-zinc-400 md:text-base"
+              className="max-w-sm text-sm leading-relaxed text-zinc-400 md:text-base"
             >
               {item.hint}
             </motion.p>
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <motion.div
-                key={item.label}
-                initial={{ scale: 1.1, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="absolute -right-8 -bottom-8 text-[5rem] font-semibold leading-none tracking-tighter text-white/[0.04] md:text-[8rem]"
-              >
-                {item.num}
-              </motion.div>
-            </div>
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={`absolute right-6 bottom-6 grid h-32 w-32 ${visuals[active]}`}
+              aria-hidden
+            >
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="border border-white/10 bg-white/[0.03] transition-colors"
+                  style={{ opacity: 0.35 + (i % 3) * 0.15 }}
+                />
+              ))}
+            </motion.div>
+            <p className="absolute top-6 right-6 text-[4rem] font-semibold leading-none text-white/[0.04] md:text-[6rem]">
+              {item.num}
+            </p>
           </div>
         </div>
       </div>
