@@ -10,5 +10,6 @@ export const experienceCompanies = [
 export const experienceCopy = {
   heading: ["BUILT BY PEOPLE", "WHO HAVE BUILT", "AT SCALE."],
   body:
-    "Experience across product and technology teams at companies including — not OpenLabs clients, but the environments that shaped how we ship software.",
+    "KorvaLabs is built by people with experience across product and technology teams at companies including — not KorvaLabs clients, but the environments that shaped how we ship software.",
+  marqueeLabel: "BUILT BY PEOPLE WITH EXPERIENCE AT",
 } as const;

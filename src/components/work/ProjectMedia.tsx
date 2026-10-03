@@ -32,7 +32,7 @@ export function ProjectMedia({ project, className = "" }: Props) {
           {label}
         </p>
       </div>
-      <div className="absolute top-6 right-6 text-[10px] tracking-[0.3em] text-zinc-600">OPENLABS</div>
+      <div className="absolute top-6 right-6 text-[10px] tracking-[0.3em] text-zinc-600">KORVALABS</div>
     </div>
   );
 }

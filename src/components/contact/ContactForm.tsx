@@ -17,7 +17,7 @@ export function ContactForm() {
     const budget = String(data.get("budget") || "");
 
     const message = [
-      "Hi OpenLabs,",
+      "Hi KorvaLabs,",
       "",
       `Name: ${name}`,
       company ? `Company: ${company}` : "",

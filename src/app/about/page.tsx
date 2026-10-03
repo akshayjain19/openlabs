@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { experienceCompanies } from "@/content/experience";
 import { whatsAppLink } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "A small product engineering team building web, mobile, AI, and automation software for startups and SMBs — location agnostic.",
+    "KorvaLabs — a small product engineering team building web, mobile, AI, and automation software for startups and SMBs. Location agnostic.",
   alternates: { canonical: "/about" },
 };
 
@@ -21,40 +20,33 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-12 lg:grid-cols-2">
           <div className="space-y-6 text-sm leading-relaxed text-zinc-400 md:text-base">
             <p>
-              OpenLabs exists for businesses that need technology to actually move the business
+              KorvaLabs exists for businesses that need technology to actually move the business
               forward.
             </p>
-            <p>
-              We sit between: business problem, product thinking, design, engineering, AI,
-              automation.
-            </p>
-            <p>
-              We are location agnostic and work with founders and teams wherever they are.
-            </p>
+            <p>We work across:</p>
+            <ul className="space-y-2 text-xs tracking-[0.15em] text-zinc-300">
+              <li>BUSINESS PROBLEM</li>
+              <li>PRODUCT THINKING</li>
+              <li>DESIGN</li>
+              <li>ENGINEERING</li>
+              <li>AI</li>
+              <li>AUTOMATION</li>
+            </ul>
+            <p>Location agnostic.</p>
           </div>
           <div className="relative min-h-[280px] overflow-hidden border border-white/10 bg-[#0a0a0a] p-8">
-            <div className="absolute inset-0 opacity-30">
-              {experienceCompanies.map((name, i) => (
-                <span
-                  key={name}
-                  className="absolute text-xs tracking-[0.35em] text-white"
-                  style={{
-                    top: `${(i * 17) % 80}%`,
-                    left: `${(i * 29) % 70}%`,
-                    transform: `rotate(${(i % 2 === 0 ? 1 : -1) * 12}deg)`,
-                  }}
-                >
-                  {name}
-                </span>
+            <div className="grid h-full grid-cols-4 grid-rows-4 gap-2 opacity-40">
+              {Array.from({ length: 16 }).map((_, i) => (
+                <div key={i} className="border border-white/10 bg-white/[0.02]" />
               ))}
             </div>
-            <p className="relative max-w-xs text-2xl font-semibold leading-tight tracking-tight">
-              Product · Design · Engineering · AI · Automation
+            <p className="absolute bottom-8 left-8 max-w-xs text-2xl font-semibold leading-tight tracking-tight">
+              KORVALABS
             </p>
           </div>
         </div>
         <Link
-          href={whatsAppLink("Hi OpenLabs — I'd like to learn more about working together.")}
+          href={whatsAppLink("Hi KorvaLabs — I'd like to learn more about working together.")}
           className="mt-14 inline-block border border-white px-6 py-3 text-xs tracking-[0.2em] hover:bg-white hover:text-black"
         >
           LET&apos;S TALK →

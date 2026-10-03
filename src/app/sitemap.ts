@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { site } from "@/content/site";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL || "https://openlabs.dev";
+const base = process.env.NEXT_PUBLIC_SITE_URL || site.url;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/work", "/services", "/about", "/contact"];

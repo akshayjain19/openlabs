@@ -10,37 +10,37 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://openlabs.dev";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || site.url;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OpenLabs — Product engineering studio",
-    template: "%s · OpenLabs",
+    default: "KorvaLabs — Product engineering studio",
+    template: "%s · KorvaLabs",
   },
   description: site.description,
   keywords: [
     "app development",
+    "mobile app development",
     "web development",
     "AI development",
     "AI automation",
     "product engineering",
     "MVP development",
     "SaaS development",
-    "mobile app development",
     "GEO",
     "AEO",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "OpenLabs",
-    title: "OpenLabs — Product engineering studio",
+    siteName: "KorvaLabs",
+    title: "KorvaLabs — Product engineering studio",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "OpenLabs",
+    title: "KorvaLabs",
     description: site.description,
   },
   robots: {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "OpenLabs",
+  name: "KorvaLabs",
   url: siteUrl,
   description: site.description,
   contactPoint: {
