@@ -38,12 +38,16 @@ function ProjectMeta({ project }: { project: Project }) {
 function Visual({ project, className = "" }: { project: Project; className?: string }) {
   const src = project.image;
   if (!src) return null;
+  const imageMax =
+    project.slug === "our-shopee"
+      ? "max-h-[min(48vh,580px)]"
+      : "max-h-[min(42vh,520px)]";
   return (
     <div
       data-cursor="project"
       className={`group relative overflow-hidden rounded-sm ${className}`}
     >
-      <ProjectImage src={src} alt={project.imageAlt} className="max-h-[min(42vh,520px)] object-cover object-top" />
+      <ProjectImage src={src} alt={project.imageAlt} className={`${imageMax} object-cover object-top`} />
     </div>
   );
 }
@@ -79,6 +83,7 @@ function VariantC({ project }: { project: Project }) {
 
 const layoutBySlug: Record<string, "a" | "b" | "c"> = {
   viacation: "a",
+  "our-shopee": "b",
   "indore-nursery": "b",
   "sg11-fantasy": "c",
   "the-laundry-house": "c",

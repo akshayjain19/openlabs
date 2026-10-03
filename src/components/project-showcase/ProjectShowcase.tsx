@@ -37,13 +37,16 @@ function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) 
     );
   }
 
+  const maxClass =
+    project.slug === "our-shopee" && tall
+      ? "max-h-[min(52vh,620px)]"
+      : tall
+        ? "max-h-[min(50vh,560px)]"
+        : "max-h-[min(44vh,480px)]";
+
   return (
     <div data-cursor="project" className="group overflow-hidden rounded-sm">
-      <ProjectImage
-        src={project.image}
-        alt={project.imageAlt}
-        className={tall ? "max-h-[min(50vh,560px)]" : "max-h-[min(44vh,480px)]"}
-      />
+      <ProjectImage src={project.image} alt={project.imageAlt} className={maxClass} />
     </div>
   );
 }
@@ -67,7 +70,9 @@ export function ProjectShowcase({ project }: Props) {
   const variant =
     project.slug === "viacation"
       ? "a"
-      : project.slug === "indore-nursery" || project.slug === "tattvasri"
+      : project.slug === "our-shopee" ||
+          project.slug === "indore-nursery" ||
+          project.slug === "tattvasri"
         ? "b"
         : "c";
 
