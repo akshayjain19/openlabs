@@ -1,5 +1,7 @@
 import { projectGallery, projectImage } from "@/lib/project-media";
 
+/** Internal: Afrikmart — DO NOT PUBLISH until verified and approved. */
+
 export type ProjectCategory = "korvalabs" | "experience";
 
 export type ProjectLayout = "feature" | "split" | "tall" | "horizontal";
@@ -43,6 +45,40 @@ export const korvaLabsProjects: Project[] = [
     gallery: projectGallery("viacation"),
     imageAlt: "Viacation travel platform",
     proof: ["Search + discovery", "Marketplace architecture", "Built end-to-end"],
+  },
+  {
+    slug: "our-shopee",
+    name: "OURSHOPEE",
+    category: "korvalabs",
+    type: "Marketplace / E-commerce",
+    layout: "feature",
+    featured: true,
+    leadPriority: 95,
+    description:
+      "Multi-seller marketplace product spanning discovery, catalogue, checkout, promotions and post-purchase flows.",
+    outcome: "Search, catalogue, checkout, order tracking and deals in one marketplace experience.",
+    proofLine: "Marketplace architecture — search, catalogue, checkout and order tracking.",
+    href: "https://www.ourshopee.com/",
+    image: projectImage("our-shopee", "hero.webp"),
+    gallery: projectGallery("our-shopee"),
+    imageAlt: "OurShopee marketplace — search, categories and product discovery",
+    proof: [
+      "Marketplace architecture",
+      "Search & discovery",
+      "Multi-seller catalogue",
+      "Checkout & payments",
+      "Order tracking",
+      "Deals & promotions",
+    ],
+    highlights: [
+      "Marketplace architecture",
+      "Search & discovery",
+      "Multi-seller experience",
+      "Product catalogue",
+      "Checkout / payments",
+      "Order tracking",
+      "Deals / promotions",
+    ],
   },
   {
     slug: "indore-nursery",
