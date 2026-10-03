@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 
-type CursorMode = "default" | "view" | "talk" | "play";
+type CursorMode = "default" | "view" | "talk" | "play" | "on" | "off";
 
 function subscribeCursorEnabled(onStoreChange: () => void) {
   const fine = window.matchMedia("(pointer: fine)");
@@ -25,11 +25,22 @@ function getCursorEnabled() {
 
 function resolveMode(target: HTMLElement | null): CursorMode {
   if (!target) return "default";
+  if (target.closest('[data-cursor="on"]')) return "on";
+  if (target.closest('[data-cursor="off"]')) return "off";
   if (target.closest('[data-cursor="play"]')) return "play";
   if (target.closest('[data-cursor="project"]')) return "view";
   if (target.closest("[data-magnetic]")) return "talk";
   return "default";
 }
+
+const LABELS: Record<CursorMode, string> = {
+  default: "",
+  view: "VIEW",
+  talk: "TALK",
+  play: "PLAY",
+  on: "ON",
+  off: "OFF",
+};
 
 export function CustomCursor() {
   const enabled = useSyncExternalStore(subscribeCursorEnabled, getCursorEnabled, () => false);
@@ -71,9 +82,7 @@ export function CustomCursor() {
         ring.current.dataset.mode = mode;
       }
       if (label.current) {
-        const text =
-          mode === "view" ? "VIEW" : mode === "talk" ? "TALK" : mode === "play" ? "PLAY" : "";
-        label.current.textContent = text;
+        label.current.textContent = LABELS[mode];
       }
     };
 
