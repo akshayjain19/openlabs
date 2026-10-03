@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Project } from "@/content/projects";
-import { ProjectImage } from "@/components/work/ProjectImage";
+import { ProjectMediaFrame } from "@/components/work/ProjectMediaFrame";
 
 type Props = {
   project: Project;
@@ -25,28 +25,18 @@ function Title({ project }: { project: Project }) {
 }
 
 function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) {
-  if (!project.image) {
-    return (
-      <div
-        className={`flex items-end rounded-sm bg-[#101010] p-8 ${tall ? "min-h-[280px]" : "min-h-[220px]"}`}
-        role="img"
-        aria-label={project.imageAlt}
-      >
-        <p className="text-2xl font-semibold tracking-tight text-white/80">{project.name}</p>
-      </div>
-    );
-  }
-
-  const maxClass =
-    project.slug === "our-shopee" && tall
-      ? "max-h-[min(52vh,620px)]"
-      : tall
-        ? "max-h-[min(50vh,560px)]"
-        : "max-h-[min(44vh,480px)]";
+  const src = project.desktopImage ?? project.image;
+  const maxClass = tall ? "max-h-[min(44vh,480px)]" : "max-h-[min(40vh,440px)]";
 
   return (
     <div data-cursor="project" className="group overflow-hidden rounded-sm">
-      <ProjectImage src={project.image} alt={project.imageAlt} className={maxClass} />
+      <ProjectMediaFrame
+        src={src}
+        alt={project.imageAlt}
+        fallbackLabel={project.name}
+        variant="desktop"
+        className={maxClass}
+      />
     </div>
   );
 }

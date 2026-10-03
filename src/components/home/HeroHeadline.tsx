@@ -24,7 +24,7 @@ export function HeroHeadline() {
   return (
     <h1
       ref={ref}
-      className="mt-10 max-w-[1200px] text-[clamp(3.25rem,13vw,9rem)] font-semibold leading-[0.84] tracking-[-0.05em] transition-transform duration-75 will-change-transform md:mt-14"
+      className="mt-4 max-w-[1200px] text-[clamp(2.75rem,10vw,7.5rem)] font-semibold leading-[0.84] tracking-[-0.05em] transition-transform duration-75 will-change-transform md:mt-6"
     >
       WE BUILD
       <br />

@@ -1,4 +1,4 @@
-import { projectGallery, projectImage } from "@/lib/project-media";
+import { LEGACY_DESKTOP, LEGACY_MOBILE, projectGallery, projectImage } from "@/lib/project-media";
 
 /** Internal: Afrikmart — DO NOT PUBLISH until verified and approved. */
 
@@ -14,7 +14,10 @@ export type Project = {
   description: string;
   outcome?: string;
   href?: string;
+  /** @deprecated use desktopImage */
   image?: string;
+  desktopImage?: string;
+  mobileImage?: string;
   gallery?: string[];
   imageAlt: string;
   note?: string;
@@ -41,7 +44,9 @@ export const korvaLabsProjects: Project[] = [
     outcome: "Search, packages, and lead-generation flows.",
     proofLine: "Search + discovery for a travel marketplace.",
     href: "https://viacation.com/",
-    image: projectImage("viacation", "hero.webp"),
+    desktopImage: projectImage("viacation", LEGACY_DESKTOP),
+    mobileImage: projectImage("viacation", LEGACY_MOBILE),
+    image: projectImage("viacation", LEGACY_DESKTOP),
     gallery: projectGallery("viacation"),
     imageAlt: "Viacation travel platform",
     proof: ["Search + discovery", "Marketplace architecture", "Built end-to-end"],
@@ -50,35 +55,20 @@ export const korvaLabsProjects: Project[] = [
     slug: "our-shopee",
     name: "OURSHOPEE",
     category: "korvalabs",
-    type: "Marketplace / E-commerce",
+    type: "Feature development / Selected product work",
     layout: "feature",
-    featured: true,
-    leadPriority: 95,
-    description:
-      "Multi-seller marketplace product spanning discovery, catalogue, checkout, promotions and post-purchase flows.",
-    outcome: "Search, catalogue, checkout, order tracking and deals in one marketplace experience.",
-    proofLine: "Marketplace architecture — search, catalogue, checkout and order tracking.",
+    featured: false,
+    leadPriority: 85,
+    description: "Selected marketplace feature development on a live multi-seller product.",
+    outcome: "Scoped product engineering — not full product ownership.",
+    proofLine: "Selected marketplace feature development.",
     href: "https://www.ourshopee.com/",
-    image: projectImage("our-shopee", "hero.webp"),
+    desktopImage: projectImage("our-shopee", LEGACY_DESKTOP),
+    mobileImage: projectImage("our-shopee", LEGACY_MOBILE),
+    image: projectImage("our-shopee", LEGACY_DESKTOP),
     gallery: projectGallery("our-shopee"),
-    imageAlt: "OurShopee marketplace — search, categories and product discovery",
-    proof: [
-      "Marketplace architecture",
-      "Search & discovery",
-      "Multi-seller catalogue",
-      "Checkout & payments",
-      "Order tracking",
-      "Deals & promotions",
-    ],
-    highlights: [
-      "Marketplace architecture",
-      "Search & discovery",
-      "Multi-seller experience",
-      "Product catalogue",
-      "Checkout / payments",
-      "Order tracking",
-      "Deals / promotions",
-    ],
+    imageAlt: "OurShopee marketplace — selected feature work",
+    proof: ["Marketplace features", "Product engineering"],
   },
   {
     slug: "indore-nursery",
@@ -92,7 +82,9 @@ export const korvaLabsProjects: Project[] = [
     outcome: "Built for organic discovery and local commerce.",
     proofLine: "Built for organic discovery and local commerce.",
     href: "https://indorenursery.com/",
-    image: projectImage("indore-nursery", "hero.webp"),
+    desktopImage: projectImage("indore-nursery", LEGACY_DESKTOP),
+    mobileImage: projectImage("indore-nursery", LEGACY_MOBILE),
+    image: projectImage("indore-nursery", LEGACY_DESKTOP),
     gallery: projectGallery("indore-nursery"),
     imageAlt: "Indore Nursery commerce platform",
     proof: ["Multi-step commerce flow", "Catalogue at scale", "Built end-to-end"],
@@ -109,7 +101,9 @@ export const korvaLabsProjects: Project[] = [
     outcome: "High-engagement consumer product flows.",
     proofLine: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
-    image: projectImage("sg11-fantasy", "hero.webp"),
+    desktopImage: projectImage("sg11-fantasy", LEGACY_DESKTOP),
+    mobileImage: projectImage("sg11-fantasy", LEGACY_MOBILE),
+    image: projectImage("sg11-fantasy", LEGACY_DESKTOP),
     gallery: projectGallery("sg11-fantasy"),
     imageAlt: "SG11 Fantasy sports product",
     proof: ["Consumer app experience", "Complex user flows"],
@@ -128,7 +122,9 @@ export const korvaLabsProjects: Project[] = [
     outcome: "Garment-care across 9 major cities — discovery, booking, and enquiries.",
     proofLine: "Service discovery, booking and local lead generation.",
     href: "https://thelaundryhouseindia.com/",
-    image: projectImage("the-laundry-house", "hero.webp"),
+    desktopImage: projectImage("the-laundry-house", LEGACY_DESKTOP),
+    mobileImage: projectImage("the-laundry-house", LEGACY_MOBILE),
+    image: projectImage("the-laundry-house", LEGACY_DESKTOP),
     gallery: projectGallery("the-laundry-house"),
     imageAlt: "The Laundry House digital experience for garment care",
     proof: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
@@ -159,7 +155,9 @@ export const korvaLabsProjects: Project[] = [
       "Digital commerce for a spiritual lifestyle brand with WhatsApp-led purchase flows.",
     proofLine: "WhatsApp-led commerce and product discovery.",
     href: "https://tattvasri.com/",
-    image: projectImage("tattvasri", "hero.webp"),
+    desktopImage: projectImage("tattvasri", LEGACY_DESKTOP),
+    mobileImage: projectImage("tattvasri", LEGACY_MOBILE),
+    image: projectImage("tattvasri", LEGACY_DESKTOP),
     gallery: projectGallery("tattvasri"),
     imageAlt: "Tattvasri lifestyle commerce experience",
     proof: ["WhatsApp-led commerce", "Product discovery"],

@@ -1,25 +1,25 @@
 import { experienceCompanies } from "@/content/experience";
 
-type LogoAsset = { src: string; height: number };
+type LogoAsset = { src: string; height: number; maxWidth?: number };
 
 const logos: Record<(typeof experienceCompanies)[number], LogoAsset> = {
-  ZUPERIOR: { src: "/logos/zuperior.png", height: 28 },
-  ZETA: { src: "/logos/zeta.svg", height: 22 },
-  FLIPKART: { src: "/logos/flipkart.png", height: 26 },
-  AMAZON: { src: "/logos/amazon.svg", height: 26 },
-  EXPEDIA: { src: "/logos/expedia.svg", height: 22 },
-  PROBO: { src: "/logos/probo.png", height: 24 },
-  HIKE: { src: "/logos/hike.svg", height: 22 },
+  ZUPERIOR: { src: "/logos/zuperior.png", height: 30 },
+  ZETA: { src: "/logos/zeta.svg", height: 26, maxWidth: 72 },
+  FLIPKART: { src: "/logos/flipkart.png", height: 28 },
+  AMAZON: { src: "/logos/amazon.svg", height: 28, maxWidth: 96 },
+  EXPEDIA: { src: "/logos/expedia.svg", height: 26, maxWidth: 88 },
+  PROBO: { src: "/logos/probo.png", height: 26, maxWidth: 88 },
+  HIKE: { src: "/logos/hike.svg", height: 24, maxWidth: 72 },
 };
 
 export function ExperienceLogoGrid() {
   return (
-    <section className="border-b border-white/10 py-[70px] md:py-[90px]">
+    <section className="border-b border-white/10 py-12 md:py-16">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <h2 className="max-w-3xl text-[clamp(1.25rem,2.5vw,2rem)] font-semibold leading-snug tracking-[-0.03em]">
+        <h2 className="max-w-[42rem] text-[clamp(1.05rem,2.2vw,1.65rem)] font-semibold leading-snug tracking-[-0.02em] text-balance">
           EXPERIENCE ACROSS PRODUCT &amp; TECHNOLOGY TEAMS AT
         </h2>
-        <ul className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-6 md:mt-10 md:gap-x-14">
+        <ul className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-7 md:mt-10 md:gap-x-10">
           {experienceCompanies.map((name) => {
             const logo = logos[name];
             return (
@@ -28,14 +28,14 @@ export function ExperienceLogoGrid() {
                 <img
                   src={logo.src}
                   alt={`${name} logo`}
-                  className="w-auto max-w-[120px] object-contain opacity-75 brightness-0 invert transition hover:opacity-100"
-                  style={{ height: logo.height, maxWidth: name === "HIKE" ? 88 : undefined }}
+                  style={{ height: logo.height, maxWidth: logo.maxWidth ?? 120 }}
+                  className="w-auto object-contain opacity-90 transition hover:opacity-100"
                 />
               </li>
             );
           })}
         </ul>
-        <p className="mt-6 text-[10px] tracking-[0.2em] text-zinc-600 uppercase">
+        <p className="mt-5 text-[10px] tracking-[0.2em] text-zinc-600 uppercase">
           Team experience — not client logos
         </p>
       </div>
