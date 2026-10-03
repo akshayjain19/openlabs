@@ -5,6 +5,7 @@ export const experienceCompanies = [
   "AMAZON",
   "EXPEDIA",
   "PROBO",
+  "HIKE",
 ] as const;
 
 export const experienceCopy = {

@@ -9,6 +9,7 @@ const logos: Record<(typeof experienceCompanies)[number], LogoAsset> = {
   AMAZON: { src: "/logos/amazon.svg", height: 26 },
   EXPEDIA: { src: "/logos/expedia.svg", height: 22 },
   PROBO: { src: "/logos/probo.png", height: 24 },
+  HIKE: { src: "/logos/hike.svg", height: 22 },
 };
 
 export function ExperienceLogoGrid() {
@@ -27,8 +28,8 @@ export function ExperienceLogoGrid() {
                 <img
                   src={logo.src}
                   alt={`${name} logo`}
-                  style={{ height: logo.height }}
                   className="w-auto max-w-[120px] object-contain opacity-75 brightness-0 invert transition hover:opacity-100"
+                  style={{ height: logo.height, maxWidth: name === "HIKE" ? 88 : undefined }}
                 />
               </li>
             );
