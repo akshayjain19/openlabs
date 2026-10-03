@@ -147,6 +147,23 @@ export function ProjectShowcase({ project, index }: Props) {
           </div>
         </div>,
       );
+    case "the-laundry-house":
+      return wrap(
+        <div className="pb-16 md:pb-28">
+          <SpreadMedia project={project} aspect="aspect-[16/10] md:aspect-[2/1]" />
+          <div className="mt-8 grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+            <div>
+              <p className="text-[10px] tracking-[0.35em] text-zinc-500">SERVICE BUSINESS</p>
+              <h3 className="mt-2 text-[clamp(2.25rem,6vw,4.5rem)] font-semibold leading-[0.92] tracking-[-0.04em]">
+                {title}
+              </h3>
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-zinc-500">{project.description}</p>
+              <MetaLine project={project} />
+            </div>
+            <IndexMark n={num} />
+          </div>
+        </div>,
+      );
     default:
       return wrap(
         <div className="grid gap-8 pb-16 md:grid-cols-2 md:pb-20">

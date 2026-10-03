@@ -71,12 +71,29 @@ export const korvaLabsProjects: Project[] = [
     proof: ["Consumer app experience", "Complex user flows"],
   },
   {
+    slug: "the-laundry-house",
+    name: "THE LAUNDRY HOUSE",
+    category: "korvalabs",
+    type: "Service business / Digital experience",
+    layout: "split",
+    featured: true,
+    leadPriority: 75,
+    description:
+      "A premium digital experience for a garment-care business, bringing service discovery, booking, doorstep pickup and delivery, store discovery, and franchise enquiries into one platform.",
+    outcome: "Garment-care services across 9 major cities — discovery, booking, and enquiries.",
+    href: "https://thelaundryhouseindia.com/",
+    image: sitePreview("https://thelaundryhouseindia.com/", 1600),
+    imageAlt: "The Laundry House digital experience for garment care",
+    proof: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
+    highlights: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
+  },
+  {
     slug: "travel-deal-online",
     name: "TRAVEL DEAL ONLINE",
     category: "korvalabs",
     type: "Travel",
     layout: "horizontal",
-    featured: true,
+    featured: false,
     leadPriority: 70,
     description: "Travel deal and discovery platform.",
     outcome: "Deal discovery and travel marketplace flows.",
@@ -139,10 +156,11 @@ export const experienceProjects: Project[] = [
 
 export const allProjects = [...korvaLabsProjects, ...experienceProjects];
 
-export function getFeaturedHomeProjects() {
+export function getFeaturedHomeProjects(limit = 4) {
   return korvaLabsProjects
     .filter((p) => p.featured)
-    .sort((a, b) => (b.leadPriority ?? 0) - (a.leadPriority ?? 0));
+    .sort((a, b) => (b.leadPriority ?? 0) - (a.leadPriority ?? 0))
+    .slice(0, limit);
 }
 
 export function getProject(slug: string) {
