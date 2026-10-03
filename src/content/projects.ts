@@ -10,97 +10,117 @@ export type Project = {
   category: ProjectCategory;
   type: string;
   description: string;
+  outcome?: string;
   href?: string;
   image?: string;
+  gallery?: string[];
   imageAlt: string;
   note?: string;
   layout: ProjectLayout;
+  /** Verified outcomes only — do not invent */
+  proof?: string[];
   highlights?: string[];
+  featured?: boolean;
+  leadPriority?: number;
 };
 
 export const korvaLabsProjects: Project[] = [
   {
-    slug: "indore-nursery",
-    name: "INDORE NURSERY",
-    category: "korvalabs",
-    type: "E-commerce / Commerce",
-    layout: "feature",
-    description:
-      "A commerce experience for a plant nursery with product discovery, catalogue browsing, shopping flows and local fulfilment.",
-    href: "https://indorenursery.com/",
-    image: sitePreview("https://indorenursery.com/"),
-    imageAlt: "Indore Nursery commerce platform",
-    highlights: ["Catalogue", "Commerce", "Fulfilment"],
-  },
-  {
-    slug: "tattvasri",
-    name: "TATTVASRI",
-    category: "korvalabs",
-    type: "E-commerce / Lifestyle",
-    layout: "split",
-    description:
-      "Digital commerce experience for a spiritual lifestyle brand, including product discovery and WhatsApp-led commerce.",
-    href: "https://tattvasri.com/",
-    image: sitePreview("https://tattvasri.com/"),
-    imageAlt: "Tattvasri lifestyle commerce experience",
-    highlights: ["Commerce", "WhatsApp-led flows"],
-  },
-  {
     slug: "viacation",
     name: "VIACATION",
     category: "korvalabs",
-    type: "Travel / Travel Technology",
+    type: "Travel product",
     layout: "tall",
-    description:
-      "Travel discovery and marketplace experience spanning destinations, packages, search and lead-generation flows.",
+    featured: true,
+    leadPriority: 100,
+    description: "Travel discovery and marketplace experience.",
+    outcome: "Search, packages, and lead-generation flows.",
     href: "https://viacation.com/",
-    image: sitePreview("https://viacation.com/"),
+    image: sitePreview("https://viacation.com/", 1600),
     imageAlt: "Viacation travel platform",
-    highlights: ["Marketplace", "Search", "Lead generation"],
+    proof: ["Search + discovery", "Marketplace architecture", "Built end-to-end"],
+  },
+  {
+    slug: "indore-nursery",
+    name: "INDORE NURSERY",
+    category: "korvalabs",
+    type: "Commerce",
+    layout: "feature",
+    featured: true,
+    leadPriority: 90,
+    description: "Commerce for a plant nursery with catalogue and local fulfilment.",
+    outcome: "Built for organic discovery and local commerce.",
+    href: "https://indorenursery.com/",
+    image: sitePreview("https://indorenursery.com/", 1600),
+    imageAlt: "Indore Nursery commerce platform",
+    proof: ["Multi-step commerce flow", "Catalogue at scale", "Built end-to-end"],
   },
   {
     slug: "sg11-fantasy",
     name: "SG11 FANTASY",
     category: "korvalabs",
-    type: "Fantasy Sports / Consumer Product",
+    type: "Consumer product",
     layout: "split",
-    description: "Consumer-facing fantasy sports product experience.",
+    featured: true,
+    leadPriority: 80,
+    description: "Consumer fantasy sports product experience.",
+    outcome: "High-engagement consumer product flows.",
     href: "https://sg11fantasyindia.com/",
-    image: sitePreview("https://sg11fantasyindia.com/"),
+    image: sitePreview("https://sg11fantasyindia.com/", 1600),
     imageAlt: "SG11 Fantasy sports product",
-    highlights: ["Consumer product", "Fantasy sports"],
+    proof: ["Consumer app experience", "Complex user flows"],
   },
   {
     slug: "travel-deal-online",
     name: "TRAVEL DEAL ONLINE",
     category: "korvalabs",
-    type: "Travel Marketplace",
+    type: "Travel",
     layout: "horizontal",
+    featured: true,
+    leadPriority: 70,
     description: "Travel deal and discovery platform.",
+    outcome: "Deal discovery and travel marketplace flows.",
     imageAlt: "Travel Deal Online marketplace product",
-    highlights: ["Deals", "Discovery"],
+    proof: ["Travel marketplace", "Discovery flows"],
+  },
+  {
+    slug: "tattvasri",
+    name: "TATTVASRI",
+    category: "korvalabs",
+    type: "Commerce",
+    layout: "split",
+    featured: false,
+    leadPriority: 50,
+    description:
+      "Digital commerce for a spiritual lifestyle brand with WhatsApp-led purchase flows.",
+    href: "https://tattvasri.com/",
+    image: sitePreview("https://tattvasri.com/", 1600),
+    imageAlt: "Tattvasri lifestyle commerce experience",
+    proof: ["WhatsApp-led commerce", "Product discovery"],
   },
   {
     slug: "mobile-game",
     name: "MOBILE GAME",
     category: "korvalabs",
-    type: "Consumer Mobile Product",
+    type: "Consumer mobile",
     layout: "tall",
+    featured: false,
+    leadPriority: 20,
     description: "Casual mobile game product.",
     note: "Not represented as a currently live public release.",
     imageAlt: "Mobile game product work",
-    highlights: ["Mobile", "Casual game"],
   },
   {
     slug: "gaming-platform",
     name: "GAMING PLATFORM",
     category: "korvalabs",
-    type: "Interactive Entertainment",
+    type: "Interactive entertainment",
     layout: "horizontal",
-    description: "Older casino and poker-related mobile and product work.",
+    featured: false,
+    leadPriority: 10,
+    description: "Older casino and poker-related product work.",
     note: "Not represented as currently live commercial products.",
     imageAlt: "Gaming platform engineering work",
-    highlights: ["Gaming", "Legacy platforms"],
   },
 ];
 
@@ -112,12 +132,18 @@ export const experienceProjects: Project[] = [
     type: "Professional experience",
     layout: "feature",
     description:
-      "Experience across product and technology teams at scale — shipping, operating, and improving software in complex environments.",
+      "Experience across product and technology teams at scale — shipping and operating software in complex environments.",
     imageAlt: "Professional experience at scale",
   },
 ];
 
 export const allProjects = [...korvaLabsProjects, ...experienceProjects];
+
+export function getFeaturedHomeProjects() {
+  return korvaLabsProjects
+    .filter((p) => p.featured)
+    .sort((a, b) => (b.leadPriority ?? 0) - (a.leadPriority ?? 0));
+}
 
 export function getProject(slug: string) {
   return allProjects.find((p) => p.slug === slug);

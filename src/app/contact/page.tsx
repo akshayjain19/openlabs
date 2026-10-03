@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Start a conversation with KorvaLabs about your product, app, or automation project.",
+  description: "Contact KorvaLabs about your app, platform, or software product.",
   alternates: { canonical: "/contact" },
 };
 
@@ -20,18 +20,25 @@ export default function ContactPage() {
             <br />
             SOMETHING.
           </h1>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-zinc-400 md:text-base">
-            The fastest path is WhatsApp. Send a short note about what you&apos;re building — or
-            use the form and we&apos;ll open a pre-filled message for you.
+          <p className="mt-6 max-w-md text-sm leading-relaxed text-zinc-500">
+            Tell us what you&apos;re building, what isn&apos;t working, or what needs to exist.
           </p>
-          <Link
-            href={whatsAppLink("Hi KorvaLabs — I'd like to start a conversation.")}
-            data-magnetic
-            className="mt-10 inline-flex border border-white bg-white px-6 py-3 text-xs font-medium tracking-[0.2em] text-black hover:bg-zinc-200"
-          >
-            WHATSAPP US →
-          </Link>
-          <p className="mt-4 text-sm text-zinc-500">{site.whatsapp.display}</p>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href={whatsAppLink("Hi KorvaLabs — I'd like to start a conversation.")}
+              data-magnetic
+              className="inline-flex border border-white bg-white px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-black hover:bg-zinc-200"
+            >
+              WHATSAPP US →
+            </Link>
+            <Link
+              href={site.email.href}
+              data-magnetic
+              className="inline-flex border border-white/20 px-6 py-3 text-[11px] font-medium tracking-[0.2em] text-white hover:border-white"
+            >
+              EMAIL US →
+            </Link>
+          </div>
         </div>
         <ContactForm />
       </div>

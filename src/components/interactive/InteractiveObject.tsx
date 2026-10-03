@@ -24,13 +24,13 @@ function isMobileFallback() {
   );
 }
 
-type PointerRef = React.RefObject<{ x: number; y: number }>;
+type PointerRef = React.RefObject<{ x: number; y: number; vx: number; vy: number }>;
 
 function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const cageRef = useRef<THREE.Group>(null);
   const { geometry, basePositions } = useMemo(() => {
-    const geo = new THREE.SphereGeometry(0.48, 40, 40);
+    const geo = new THREE.IcosahedronGeometry(0.5, 5);
     return {
       geometry: geo,
       basePositions: new Float32Array(geo.attributes.position.array),
@@ -42,11 +42,12 @@ function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
   /* eslint-disable react-hooks/immutability -- realtime mesh deformation in R3F useFrame */
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    const targetX = pointer.current.x * 0.42;
-    const targetY = pointer.current.y * 0.38;
+    const targetX = pointer.current.x * 0.48;
+    const targetY = pointer.current.y * 0.42;
+    const speed = Math.min(1.2, Math.hypot(pointer.current.vx, pointer.current.vy) * 8);
 
-    body.current.vx += (targetX - body.current.x) * 0.045;
-    body.current.vy += (targetY - body.current.y) * 0.045;
+    body.current.vx += (targetX - body.current.x) * (0.04 + speed * 0.02);
+    body.current.vy += (targetY - body.current.y) * (0.04 + speed * 0.02);
     body.current.vx *= 0.86;
     body.current.vy *= 0.86;
     body.current.x += body.current.vx;
@@ -75,7 +76,7 @@ function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
       const ox = basePositions[ix];
       const oy = basePositions[ix + 1];
       const oz = basePositions[ix + 2];
-      const pulse = Math.sin(t * 2.8 + ox * 4.5 + oy * 3.2) * 0.028;
+      const pulse = Math.sin(t * 2.8 + ox * 4.5 + oy * 3.2) * (0.022 + speed * 0.04);
       const nx = ox + body.current.x;
       const ny = oy + body.current.y;
       const len = Math.sqrt(nx * nx + ny * ny + oz * oz) || 1;
@@ -92,11 +93,11 @@ function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
   return (
     <group ref={cageRef}>
       <mesh>
-        <boxGeometry args={[1.75, 1.75, 1.75]} />
-        <meshBasicMaterial color="#888888" wireframe transparent opacity={0.22} />
+        <boxGeometry args={[1.85, 1.85, 1.85]} />
+        <meshBasicMaterial color="#888888" wireframe transparent opacity={0.18} />
       </mesh>
       <mesh>
-        <boxGeometry args={[1.75, 1.75, 1.75]} />
+        <boxGeometry args={[1.85, 1.85, 1.85]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0} />
         <Edges threshold={15} color="#cccccc" />
       </mesh>
@@ -148,14 +149,18 @@ type Props = {
 };
 
 export function InteractiveObject({ className = "" }: Props) {
-  const pointer = useRef({ x: 0, y: 0 });
+  const pointer = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
   const mobile = useSyncExternalStore(subscribeMobile, isMobileFallback, () => true);
 
   useEffect(() => {
     if (mobile) return;
     const onMove = (e: PointerEvent) => {
-      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      const ny = -(e.clientY / window.innerHeight) * 2 + 1;
+      pointer.current.vx = nx - pointer.current.x;
+      pointer.current.vy = ny - pointer.current.y;
+      pointer.current.x = nx;
+      pointer.current.y = ny;
     };
     window.addEventListener("pointermove", onMove);
     return () => window.removeEventListener("pointermove", onMove);
@@ -172,7 +177,7 @@ export function InteractiveObject({ className = "" }: Props) {
   return (
     <div
       data-cursor="play"
-      className={`relative min-h-[min(72vh,680px)] border-t border-white/10 bg-[#080808] lg:min-h-[520px] lg:border-t-0 lg:border-l ${className}`}
+      className={`relative min-h-[min(56vh,560px)] border-t border-white/10 bg-[#080808] ${className}`}
     >
       <Canvas camera={{ position: [0, 0, 3.6], fov: 40 }} dpr={[1, 1.4]} gl={{ antialias: true, powerPreference: "high-performance" }}>
         <color attach="background" args={["#080808"]} />

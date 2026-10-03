@@ -2,48 +2,38 @@ import Link from "next/link";
 import { site } from "@/content/site";
 import { whatsAppLink } from "@/lib/utils";
 
-const footerNav = [
-  ...site.nav,
-  { label: "CONTACT", href: "/contact" },
-];
+const footerNav = [...site.nav, { label: "CONTACT", href: "/contact" }];
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-white/10 bg-[#050505]">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-[1400px] gap-10 px-5 py-14 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
         <div>
           <p className="text-sm font-bold tracking-[0.35em] text-white">{site.name}</p>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-500">{site.tagline}</p>
+          <p className="mt-3 text-sm text-zinc-600">{site.tagline}</p>
         </div>
-
-        <div>
-          <ul className="mt-1 space-y-2">
-            {footerNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-xs tracking-[0.2em] text-zinc-400 hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <a
-            href={whatsAppLink()}
-            className="block text-sm text-zinc-300 hover:text-white"
-          >
-            WhatsApp {site.whatsapp.display}
+        <ul className="space-y-2">
+          {footerNav.map((item) => (
+            <li key={item.href}>
+              <Link href={item.href} className="text-xs tracking-[0.2em] text-zinc-400 hover:text-white">
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="space-y-3">
+          <a href={whatsAppLink()} className="block text-xs tracking-[0.2em] text-zinc-400 hover:text-white">
+            WHATSAPP US →
           </a>
-          <p className="mt-6 text-xs tracking-[0.2em] text-zinc-500">{site.location}</p>
+          <a href={site.email.href} className="block text-xs tracking-[0.2em] text-zinc-400 hover:text-white">
+            EMAIL US →
+          </a>
+          <p className="pt-2 text-xs text-zinc-600">{site.email.address}</p>
         </div>
       </div>
-      <div className="border-t border-white/10 px-5 py-6 md:px-8">
-        <p className="mx-auto max-w-[1400px] text-xs text-zinc-600">
-          © {new Date().getFullYear()} KorvaLabs. All rights reserved.
+      <div className="border-t border-white/10 px-5 py-5 md:px-8">
+        <p className="mx-auto max-w-[1400px] text-xs text-zinc-700">
+          © {new Date().getFullYear()} KorvaLabs
         </p>
       </div>
     </footer>
