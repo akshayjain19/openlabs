@@ -24,8 +24,8 @@ export default function WorkPage() {
       </div>
 
       <div className="mt-10">
-        {projects.map((project, index) => (
-          <ProjectShowcase key={project.slug} project={project} index={index} />
+        {projects.map((project) => (
+          <ProjectShowcase key={project.slug} project={project} />
         ))}
       </div>
 

@@ -18,14 +18,14 @@ export function HomePage() {
       <FeaturedWork projects={featured} />
       <ExperienceLogoGrid />
 
-      <section className="border-b border-white/10 py-14 md:py-20">
+      <section className="border-b border-white/10 py-12 md:py-16">
         <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-          <h2 className="max-w-2xl text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+          <h2 className="max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
             GOOD SOFTWARE STARTS BEFORE THE CODE.
           </h2>
-          <ul className="mt-10 space-y-6 md:mt-12">
+          <ul className="mt-6 flex flex-col gap-3 md:mt-8 md:flex-row md:flex-wrap md:gap-x-10">
             {principleItems.map((p) => (
-              <li key={p.text} className="max-w-xl text-sm text-zinc-500 md:text-base">
+              <li key={p.text} className="text-sm text-zinc-500">
                 {p.text}
               </li>
             ))}

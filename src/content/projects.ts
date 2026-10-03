@@ -1,4 +1,4 @@
-import { sitePreview } from "@/lib/screenshot";
+import { projectGallery, projectImage } from "@/lib/project-media";
 
 export type ProjectCategory = "korvalabs" | "experience";
 
@@ -22,6 +22,8 @@ export type Project = {
   highlights?: string[];
   featured?: boolean;
   leadPriority?: number;
+  /** One-line proof on homepage / work */
+  proofLine?: string;
 };
 
 export const korvaLabsProjects: Project[] = [
@@ -35,8 +37,10 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 100,
     description: "Travel discovery and marketplace experience.",
     outcome: "Search, packages, and lead-generation flows.",
+    proofLine: "Search + discovery for a travel marketplace.",
     href: "https://viacation.com/",
-    image: sitePreview("https://viacation.com/", 1600),
+    image: projectImage("viacation", "hero.webp"),
+    gallery: projectGallery("viacation"),
     imageAlt: "Viacation travel platform",
     proof: ["Search + discovery", "Marketplace architecture", "Built end-to-end"],
   },
@@ -50,8 +54,10 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 90,
     description: "Commerce for a plant nursery with catalogue and local fulfilment.",
     outcome: "Built for organic discovery and local commerce.",
+    proofLine: "Built for organic discovery and local commerce.",
     href: "https://indorenursery.com/",
-    image: sitePreview("https://indorenursery.com/", 1600),
+    image: projectImage("indore-nursery", "hero.webp"),
+    gallery: projectGallery("indore-nursery"),
     imageAlt: "Indore Nursery commerce platform",
     proof: ["Multi-step commerce flow", "Catalogue at scale", "Built end-to-end"],
   },
@@ -65,8 +71,10 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 80,
     description: "Consumer fantasy sports product experience.",
     outcome: "High-engagement consumer product flows.",
+    proofLine: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
-    image: sitePreview("https://sg11fantasyindia.com/", 1600),
+    image: projectImage("sg11-fantasy", "hero.webp"),
+    gallery: projectGallery("sg11-fantasy"),
     imageAlt: "SG11 Fantasy sports product",
     proof: ["Consumer app experience", "Complex user flows"],
   },
@@ -74,19 +82,20 @@ export const korvaLabsProjects: Project[] = [
     slug: "the-laundry-house",
     name: "THE LAUNDRY HOUSE",
     category: "korvalabs",
-    type: "Service business / Digital experience",
+    type: "Service business",
     layout: "split",
     featured: true,
     /** Fourth featured homepage slot; higher values rank first site-wide */
     leadPriority: 75,
     description:
       "A premium digital experience for a garment-care business, bringing service discovery, booking, doorstep pickup and delivery, store discovery, and franchise enquiries into one platform.",
-    outcome: "Garment-care services across 9 major cities — discovery, booking, and enquiries.",
+    outcome: "Garment-care across 9 major cities — discovery, booking, and enquiries.",
+    proofLine: "Service discovery, booking and local lead generation.",
     href: "https://thelaundryhouseindia.com/",
-    image: sitePreview("https://thelaundryhouseindia.com/", 1600),
+    image: projectImage("the-laundry-house", "hero.webp"),
+    gallery: projectGallery("the-laundry-house"),
     imageAlt: "The Laundry House digital experience for garment care",
     proof: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
-    highlights: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
   },
   {
     slug: "travel-deal-online",
@@ -98,6 +107,7 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 70,
     description: "Travel deal and discovery platform.",
     outcome: "Deal discovery and travel marketplace flows.",
+    proofLine: "Travel deal discovery and marketplace flows.",
     imageAlt: "Travel Deal Online marketplace product",
     proof: ["Travel marketplace", "Discovery flows"],
   },
@@ -111,8 +121,10 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 50,
     description:
       "Digital commerce for a spiritual lifestyle brand with WhatsApp-led purchase flows.",
+    proofLine: "WhatsApp-led commerce and product discovery.",
     href: "https://tattvasri.com/",
-    image: sitePreview("https://tattvasri.com/", 1600),
+    image: projectImage("tattvasri", "hero.webp"),
+    gallery: projectGallery("tattvasri"),
     imageAlt: "Tattvasri lifestyle commerce experience",
     proof: ["WhatsApp-led commerce", "Product discovery"],
   },

@@ -4,7 +4,6 @@ export const site = {
   description:
     "KorvaLabs builds digital products end to end — apps, platforms, and production software for startups and SMBs.",
   url: "https://korvalabs.dev",
-  location: "LOCATION AGNOSTIC",
   whatsapp: {
     e164: "918441078510",
     href: "https://wa.me/918441078510",
