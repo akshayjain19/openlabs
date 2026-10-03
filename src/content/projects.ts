@@ -77,6 +77,7 @@ export const korvaLabsProjects: Project[] = [
     type: "Service business / Digital experience",
     layout: "split",
     featured: true,
+    /** Fourth featured homepage slot; higher values rank first site-wide */
     leadPriority: 75,
     description:
       "A premium digital experience for a garment-care business, bringing service discovery, booking, doorstep pickup and delivery, store discovery, and franchise enquiries into one platform.",
