@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
 
+type CursorMode = "default" | "view" | "talk" | "play";
+
 function subscribeCursorEnabled(onStoreChange: () => void) {
   const fine = window.matchMedia("(pointer: fine)");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -21,10 +23,19 @@ function getCursorEnabled() {
   );
 }
 
+function resolveMode(target: HTMLElement | null): CursorMode {
+  if (!target) return "default";
+  if (target.closest('[data-cursor="play"]')) return "play";
+  if (target.closest('[data-cursor="project"]')) return "view";
+  if (target.closest("[data-magnetic]")) return "talk";
+  return "default";
+}
+
 export function CustomCursor() {
   const enabled = useSyncExternalStore(subscribeCursorEnabled, getCursorEnabled, () => false);
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
+  const label = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!enabled) return;
@@ -45,8 +56,8 @@ export function CustomCursor() {
     };
 
     const tick = () => {
-      rx += (x - rx) * 0.18;
-      ry += (y - ry) * 0.18;
+      rx += (x - rx) * 0.16;
+      ry += (y - ry) * 0.16;
       if (ring.current) {
         ring.current.style.transform = `translate(${rx}px, ${ry}px)`;
       }
@@ -55,9 +66,14 @@ export function CustomCursor() {
 
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      const magnetic = target?.closest("[data-magnetic]");
+      const mode = resolveMode(target);
       if (ring.current) {
-        ring.current.dataset.state = magnetic ? "magnetic" : "default";
+        ring.current.dataset.mode = mode;
+      }
+      if (label.current) {
+        const text =
+          mode === "view" ? "VIEW" : mode === "talk" ? "TALK" : mode === "play" ? "PLAY" : "";
+        label.current.textContent = text;
       }
     };
 
@@ -78,7 +94,9 @@ export function CustomCursor() {
   return (
     <>
       <div ref={dot} className="cursor-dot" aria-hidden />
-      <div ref={ring} className="cursor-ring" aria-hidden />
+      <div ref={ring} className="cursor-ring" data-mode="default" aria-hidden>
+        <span ref={label} className="cursor-label" />
+      </div>
     </>
   );
 }

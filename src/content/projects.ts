@@ -1,3 +1,5 @@
+import { sitePreview } from "@/lib/screenshot";
+
 export type ProjectCategory = "korvalabs" | "experience";
 
 export type ProjectLayout = "feature" | "split" | "tall" | "horizontal";
@@ -26,6 +28,7 @@ export const korvaLabsProjects: Project[] = [
     description:
       "A commerce experience for a plant nursery with product discovery, catalogue browsing, shopping flows and local fulfilment.",
     href: "https://indorenursery.com/",
+    image: sitePreview("https://indorenursery.com/"),
     imageAlt: "Indore Nursery commerce platform",
     highlights: ["Catalogue", "Commerce", "Fulfilment"],
   },
@@ -38,6 +41,7 @@ export const korvaLabsProjects: Project[] = [
     description:
       "Digital commerce experience for a spiritual lifestyle brand, including product discovery and WhatsApp-led commerce.",
     href: "https://tattvasri.com/",
+    image: sitePreview("https://tattvasri.com/"),
     imageAlt: "Tattvasri lifestyle commerce experience",
     highlights: ["Commerce", "WhatsApp-led flows"],
   },
@@ -50,6 +54,7 @@ export const korvaLabsProjects: Project[] = [
     description:
       "Travel discovery and marketplace experience spanning destinations, packages, search and lead-generation flows.",
     href: "https://viacation.com/",
+    image: sitePreview("https://viacation.com/"),
     imageAlt: "Viacation travel platform",
     highlights: ["Marketplace", "Search", "Lead generation"],
   },
@@ -61,6 +66,7 @@ export const korvaLabsProjects: Project[] = [
     layout: "split",
     description: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
+    image: sitePreview("https://sg11fantasyindia.com/"),
     imageAlt: "SG11 Fantasy sports product",
     highlights: ["Consumer product", "Fantasy sports"],
   },

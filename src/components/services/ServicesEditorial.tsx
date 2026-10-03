@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { services } from "@/content/services";
+import { KorvaFrame } from "@/components/ui/KorvaFrame";
 
 export function ServicesEditorial() {
   return (
@@ -11,6 +12,7 @@ export function ServicesEditorial() {
         <h1 className="text-[clamp(2.5rem,8vw,6rem)] font-semibold leading-[0.92] tracking-[-0.04em]">
           WHAT WE CAN BUILD.
         </h1>
+        <KorvaFrame variant="rule" className="mt-10 max-w-xl" />
       </div>
 
       <div className="mx-auto mt-20 max-w-[1400px]">
