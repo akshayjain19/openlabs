@@ -1,129 +1,60 @@
 export type Service = {
   id: string;
   title: string;
-  headline: string;
   description: string;
-  capabilities: string[];
+  bullets: string[];
 };
 
 export const services: Service[] = [
   {
     id: "web",
     title: "WEB",
-    headline: "Web products that carry real business load.",
-    description:
-      "Customer platforms, internal dashboards, and web software meant to stay fast, maintainable, and clear as the product grows.",
-    capabilities: [
-      "Product web apps",
-      "Marketing sites with substance",
-      "Admin & operations tools",
-      "Performance & reliability work",
-      "Integrations & APIs",
-    ],
+    description: "Build websites, marketplaces, portals and web applications.",
+    bullets: ["Customer platforms", "Admin & ops tools", "Integrations", "Performance work"],
   },
   {
     id: "mobile",
     title: "MOBILE",
-    headline: "Apps built to be used every day.",
-    description:
-      "Mobile products with thoughtful flows, solid foundations, and the engineering discipline to keep shipping after launch.",
-    capabilities: [
-      "iOS & Android apps",
-      "Cross-platform delivery",
-      "Offline-aware experiences",
-      "Push & engagement hooks",
-      "Store-ready release support",
-    ],
+    description: "Android and iOS products with robust backend architecture.",
+    bullets: ["Native & cross-platform", "Release-ready delivery", "Engagement flows"],
   },
   {
     id: "ai",
     title: "AI",
-    headline: "AI that has a job to do.",
     description:
-      "Practical AI embedded in products and operations — not demos that never reach production.",
-    capabilities: [
-      "AI copilots",
-      "RAG systems",
-      "Workflow agents",
-      "Document intelligence",
-      "Classification & extraction",
-      "Internal assistants",
-      "AI-enabled product features",
-    ],
+      "AI-enabled products, copilots, RAG systems, agents, document intelligence and product features.",
+    bullets: ["Copilots & assistants", "RAG", "Classification", "Product-native AI"],
   },
   {
     id: "automation",
     title: "AUTOMATION",
-    headline: "Less manual work. More reliable operations.",
     description:
-      "Automations that connect your tools, move data, and keep teams focused on decisions instead of repetition.",
-    capabilities: [
-      "Operational workflows",
-      "Lead routing",
-      "CRM automation",
-      "Internal tooling",
-      "Notifications",
-      "Data pipelines",
-      "API orchestration",
-    ],
+      "Operational workflows, integrations, CRM automation, internal systems and AI-powered automation.",
+    bullets: ["Workflow orchestration", "CRM & lead routing", "Internal tooling"],
   },
   {
     id: "saas",
     title: "SAAS",
-    headline: "From MVP to something customers can pay for.",
-    description:
-      "SaaS foundations — auth, billing hooks, multi-tenant patterns, and the product engineering to get a first version out the door.",
-    capabilities: [
-      "MVP scoping & delivery",
-      "Subscription-ready architecture",
-      "Onboarding & activation flows",
-      "Admin & support tooling",
-      "Iteration after launch",
-    ],
+    description: "MVPs and full SaaS products designed to grow.",
+    bullets: ["MVP delivery", "Subscription foundations", "Iteration after launch"],
   },
   {
     id: "product-engineering",
     title: "PRODUCT ENGINEERING",
-    headline: "Engineering with product judgment.",
-    description:
-      "We sit close to the problem — design, architecture, and implementation aligned so the software matches how the business actually works.",
-    capabilities: [
-      "Technical discovery",
-      "System design",
-      "UI implementation",
-      "Backend & APIs",
-      "QA-minded delivery",
-      "Long-term maintenance",
-    ],
+    description: "Architecture, APIs, databases, infrastructure and ongoing product development.",
+    bullets: ["System design", "APIs & data", "Long-term engineering"],
   },
   {
     id: "geo-aeo",
     title: "GEO / AEO",
-    headline: "Discoverability for how people search now.",
     description:
-      "Structured content, entity clarity, and technical SEO aligned with generative and answer-engine discovery — without gimmicks.",
-    capabilities: [
-      "Content architecture",
-      "Structured data",
-      "Technical SEO",
-      "Entity & topic clarity",
-      "Landing system design",
-      "Measurement & iteration",
-    ],
+      "Design content and technical structures so products and brands are easier for modern search and AI systems to discover, understand and cite.",
+    bullets: ["Structured content", "Technical SEO", "Entity clarity"],
   },
   {
     id: "data",
-    title: "DATA & INTERNAL TOOLS",
-    headline: "Systems your team actually runs on.",
-    description:
-      "Reporting, analytics, and internal tools that make operations visible and decisions easier.",
-    capabilities: [
-      "Dashboards & reporting",
-      "ETL & pipelines",
-      "Warehouse-friendly models",
-      "Operational analytics",
-      "Access-controlled tooling",
-      "Integration with existing stacks",
-    ],
+    title: "DATA + INTERNAL TOOLS",
+    description: "Dashboards, internal platforms, workflows and analytics systems.",
+    bullets: ["Reporting", "Pipelines", "Operational analytics"],
   },
 ];

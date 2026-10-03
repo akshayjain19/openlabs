@@ -1,5 +1,7 @@
 export type ProjectCategory = "openlabs" | "experience";
 
+export type ProjectLayout = "feature" | "split" | "tall" | "horizontal";
+
 export type Project = {
   slug: string;
   name: string;
@@ -10,6 +12,8 @@ export type Project = {
   image?: string;
   imageAlt: string;
   note?: string;
+  layout: ProjectLayout;
+  highlights?: string[];
 };
 
 export const openlabsProjects: Project[] = [
@@ -17,69 +21,81 @@ export const openlabsProjects: Project[] = [
     slug: "indore-nursery",
     name: "INDORE NURSERY",
     category: "openlabs",
-    type: "E-commerce / Commerce platform",
+    type: "E-commerce / Commerce",
+    layout: "feature",
     description:
-      "Digital commerce experience for a plant nursery with product discovery, catalogue management, shopping flows and local fulfilment.",
+      "A commerce experience for a plant nursery, including catalogue browsing, product discovery, shopping flows and local fulfilment.",
     href: "https://indorenursery.com/",
-    image: "https://indorenursery.com/cdn/shop/files/logo.png?v=1685000000",
     imageAlt: "Indore Nursery commerce platform",
+    highlights: ["Catalogue", "Commerce flows", "Local fulfilment"],
   },
   {
     slug: "tattvasri",
     name: "TATTVASRI",
     category: "openlabs",
     type: "E-commerce / Lifestyle",
+    layout: "split",
     description:
-      "A commerce experience for a spiritual lifestyle brand, including product discovery and WhatsApp-led purchase flow.",
+      "Digital commerce experience for a spiritual lifestyle brand, including product discovery and WhatsApp-led commerce.",
     href: "https://tattvasri.com/",
     imageAlt: "Tattvasri lifestyle commerce experience",
-  },
-  {
-    slug: "sg11-fantasy",
-    name: "SG11 FANTASY",
-    category: "openlabs",
-    type: "Fantasy sports / Consumer app",
-    description: "Consumer-facing fantasy sports product and app experience.",
-    href: "https://sg11fantasyindia.com/",
-    imageAlt: "SG11 Fantasy sports product",
+    highlights: ["Product discovery", "WhatsApp commerce"],
   },
   {
     slug: "viacation",
     name: "VIACATION",
     category: "openlabs",
-    type: "Travel / Marketplace",
+    type: "Travel / Travel technology",
+    layout: "horizontal",
     description:
-      "Travel platform experience spanning destination discovery, packages, search and travel planning flows.",
+      "Travel discovery and marketplace experience spanning destinations, packages, search and lead-generation flows.",
     href: "https://viacation.com/",
     imageAlt: "Viacation travel platform",
+    highlights: ["Destinations", "Packages", "Lead generation"],
+  },
+  {
+    slug: "sg11-fantasy",
+    name: "SG11 FANTASY",
+    category: "openlabs",
+    type: "Fantasy sports / Consumer product",
+    layout: "tall",
+    description: "Consumer-facing fantasy sports product experience.",
+    href: "https://sg11fantasyindia.com/",
+    imageAlt: "SG11 Fantasy sports product",
+    highlights: ["Consumer app", "Fantasy sports"],
   },
   {
     slug: "travel-deal-online",
     name: "TRAVEL DEAL ONLINE",
     category: "openlabs",
-    type: "Travel technology",
-    description:
-      "Digital travel marketplace focused on deal discovery and booking-oriented travel flows.",
+    type: "Travel marketplace",
+    layout: "split",
+    description: "Travel deal and discovery platform.",
     imageAlt: "Travel Deal Online marketplace product",
+    highlights: ["Deal discovery", "Travel marketplace"],
   },
   {
     slug: "mobile-game",
     name: "MOBILE GAME",
     category: "openlabs",
     type: "Consumer mobile product",
-    description: "A casual mobile game experience built as a consumer product.",
+    layout: "tall",
+    description: "Casual mobile game product.",
     note: "Not represented as a currently live public release.",
     imageAlt: "Mobile game product work",
+    highlights: ["Mobile", "Casual game"],
   },
   {
     slug: "gaming-platform",
     name: "GAMING PLATFORM",
     category: "openlabs",
     type: "Interactive entertainment",
+    layout: "horizontal",
     description:
-      "Interactive mobile and gaming product engineering — including legacy casino and poker-related codebases.",
+      "Older casino and poker-related source-code projects — interactive entertainment engineering.",
     note: "Not represented as currently live commercial products.",
     imageAlt: "Gaming platform engineering work",
+    highlights: ["Gaming", "Legacy platforms"],
   },
 ];
 
@@ -89,6 +105,7 @@ export const experienceProjects: Project[] = [
     name: "PRODUCT & PLATFORM TEAMS",
     category: "experience",
     type: "Professional experience",
+    layout: "feature",
     description:
       "OpenLabs is built by people who have worked across product and technology teams at scale — shipping, operating, and improving software in complex environments.",
     imageAlt: "Team professional experience at scale",

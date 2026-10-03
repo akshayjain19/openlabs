@@ -13,8 +13,8 @@ export function ContactForm() {
     const name = String(data.get("name") || "");
     const company = String(data.get("company") || "");
     const building = String(data.get("building") || "");
-    const budget = String(data.get("budget") || "");
     const contact = String(data.get("contact") || "");
+    const budget = String(data.get("budget") || "");
 
     const message = [
       "Hi OpenLabs,",
@@ -22,8 +22,8 @@ export function ContactForm() {
       `Name: ${name}`,
       company ? `Company: ${company}` : "",
       `Building: ${building}`,
-      budget ? `Budget: ${budget}` : "",
       `Contact: ${contact}`,
+      budget ? `Budget: ${budget}` : "",
     ]
       .filter(Boolean)
       .join("\n");
@@ -47,6 +47,7 @@ export function ContactForm() {
         <input
           required
           name="name"
+          autoComplete="name"
           className="border border-white/15 bg-transparent px-3 py-3 text-sm text-white outline-none focus:border-white/40"
         />
       </label>
@@ -54,6 +55,7 @@ export function ContactForm() {
         COMPANY
         <input
           name="company"
+          autoComplete="organization"
           className="border border-white/15 bg-transparent px-3 py-3 text-sm text-white outline-none focus:border-white/40"
         />
       </label>
@@ -67,17 +69,18 @@ export function ContactForm() {
         />
       </label>
       <label className="grid gap-2 text-xs tracking-[0.15em] text-zinc-500">
-        BUDGET (OPTIONAL)
-        <input
-          name="budget"
-          className="border border-white/15 bg-transparent px-3 py-3 text-sm text-white outline-none focus:border-white/40"
-        />
-      </label>
-      <label className="grid gap-2 text-xs tracking-[0.15em] text-zinc-500">
         EMAIL / WHATSAPP
         <input
           required
           name="contact"
+          autoComplete="email"
+          className="border border-white/15 bg-transparent px-3 py-3 text-sm text-white outline-none focus:border-white/40"
+        />
+      </label>
+      <label className="grid gap-2 text-xs tracking-[0.15em] text-zinc-500">
+        BUDGET (OPTIONAL)
+        <input
+          name="budget"
           className="border border-white/15 bg-transparent px-3 py-3 text-sm text-white outline-none focus:border-white/40"
         />
       </label>
