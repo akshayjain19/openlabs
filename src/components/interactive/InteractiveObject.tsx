@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Edges } from "@react-three/drei";
 import * as THREE from "three";
 
 function subscribeMobile(onStoreChange: () => void) {
@@ -26,89 +25,52 @@ function isMobileFallback() {
 
 type PointerRef = React.RefObject<{ x: number; y: number; vx: number; vy: number }>;
 
-function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const cageRef = useRef<THREE.Group>(null);
-  const { geometry, basePositions } = useMemo(() => {
-    const geo = new THREE.IcosahedronGeometry(0.5, 5);
-    return {
-      geometry: geo,
-      basePositions: new Float32Array(geo.attributes.position.array),
-    };
-  }, []);
+function SoftMassInFrame({ pointer }: { pointer: PointerRef }) {
+  const blobRef = useRef<THREE.Mesh>(null);
+  const frameRef = useRef<THREE.Mesh>(null);
   const body = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
-  const cageWobble = useRef(0);
 
-  /* eslint-disable react-hooks/immutability -- realtime mesh deformation in R3F useFrame */
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    const targetX = pointer.current.x * 0.48;
-    const targetY = pointer.current.y * 0.42;
-    const speed = Math.min(1.2, Math.hypot(pointer.current.vx, pointer.current.vy) * 8);
+  useFrame(() => {
+    const targetX = pointer.current.x * 0.38;
+    const targetY = pointer.current.y * 0.32;
+    const spring = 0.028;
+    const damp = 0.82;
 
-    body.current.vx += (targetX - body.current.x) * (0.04 + speed * 0.02);
-    body.current.vy += (targetY - body.current.y) * (0.04 + speed * 0.02);
-    body.current.vx *= 0.86;
-    body.current.vy *= 0.86;
+    body.current.vx += (targetX - body.current.x) * spring;
+    body.current.vy += (targetY - body.current.y) * spring;
+    body.current.vx *= damp;
+    body.current.vy *= damp;
     body.current.x += body.current.vx;
     body.current.y += body.current.vy;
 
-    cageWobble.current *= 0.92;
-    cageWobble.current += (Math.abs(body.current.vx) + Math.abs(body.current.vy)) * 0.06;
-
-    if (cageRef.current) {
-      const w = cageWobble.current;
-      cageRef.current.rotation.set(w * 0.18, w * 0.24, w * 0.1);
+    const blob = blobRef.current;
+    if (blob) {
+      blob.position.set(body.current.x, body.current.y, 0);
+      const squash = 1 - Math.min(0.22, Math.abs(body.current.vx) * 0.55);
+      const stretch = 1 + Math.min(0.18, Math.abs(body.current.vy) * 0.45);
+      blob.scale.set(stretch * 1.05, squash * 1.05, 1.05);
+      blob.rotation.z = body.current.vx * 0.35;
     }
 
-    const mesh = meshRef.current;
-    if (!mesh) return;
-
-    mesh.position.set(body.current.x, body.current.y, 0);
-    const squash = 1 - Math.min(0.35, Math.abs(body.current.vx) * 0.45);
-    const stretch = 1 + Math.min(0.28, Math.abs(body.current.vy) * 0.35);
-    mesh.scale.set(stretch, squash, 1 + Math.abs(body.current.vx) * 0.12);
-
-    const pos = geometry.attributes.position;
-    const arr = pos.array as Float32Array;
-    for (let i = 0; i < pos.count; i += 1) {
-      const ix = i * 3;
-      const ox = basePositions[ix];
-      const oy = basePositions[ix + 1];
-      const oz = basePositions[ix + 2];
-      const pulse = Math.sin(t * 2.8 + ox * 4.5 + oy * 3.2) * (0.022 + speed * 0.04);
-      const nx = ox + body.current.x;
-      const ny = oy + body.current.y;
-      const len = Math.sqrt(nx * nx + ny * ny + oz * oz) || 1;
-      const bulge = pulse + Math.max(0, 0.08 - len * 0.09);
-      arr[ix] = ox + (ox / len) * bulge;
-      arr[ix + 1] = oy + (oy / len) * bulge;
-      arr[ix + 2] = oz + (oz / len) * bulge;
+    if (frameRef.current) {
+      frameRef.current.rotation.z *= 0.94;
+      frameRef.current.rotation.z += body.current.vx * 0.015;
     }
-    pos.needsUpdate = true;
-    geometry.computeVertexNormals();
   });
-  /* eslint-enable react-hooks/immutability */
 
   return (
-    <group ref={cageRef}>
-      <mesh>
-        <boxGeometry args={[1.85, 1.85, 1.85]} />
-        <meshBasicMaterial color="#888888" wireframe transparent opacity={0.18} />
+    <group>
+      <mesh ref={frameRef}>
+        <boxGeometry args={[2.05, 2.05, 0.12]} />
+        <meshStandardMaterial color="#050505" metalness={0.1} roughness={0.85} />
       </mesh>
-      <mesh>
-        <boxGeometry args={[1.85, 1.85, 1.85]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0} />
-        <Edges threshold={15} color="#cccccc" />
+      <mesh position={[0, 0, 0.08]}>
+        <boxGeometry args={[2.05, 2.05, 0.02]} />
+        <meshBasicMaterial color="#000000" />
       </mesh>
-      <mesh ref={meshRef} geometry={geometry}>
-        <meshPhysicalMaterial
-          color="#f0f0f0"
-          roughness={0.62}
-          metalness={0.02}
-          clearcoat={0.25}
-          clearcoatRoughness={0.4}
-        />
+      <mesh ref={blobRef} position={[0, 0, 0.2]}>
+        <sphereGeometry args={[0.52, 64, 64]} />
+        <meshStandardMaterial color="#f2f2f2" roughness={0.72} metalness={0.04} />
       </mesh>
     </group>
   );
@@ -117,10 +79,10 @@ function CagedSoftMass({ pointer }: { pointer: PointerRef }) {
 function Scene({ pointer }: { pointer: PointerRef }) {
   return (
     <>
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[5, 8, 6]} intensity={1.05} color="#ffffff" />
-      <directionalLight position={[-6, -3, 4]} intensity={0.25} color="#cccccc" />
-      <CagedSoftMass pointer={pointer} />
+      <ambientLight intensity={0.65} />
+      <directionalLight position={[4, 6, 8]} intensity={0.9} />
+      <directionalLight position={[-5, -2, 6]} intensity={0.25} />
+      <SoftMassInFrame pointer={pointer} />
     </>
   );
 }
@@ -128,17 +90,11 @@ function Scene({ pointer }: { pointer: PointerRef }) {
 function MobileSignatureFallback() {
   return (
     <div
-      className="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-[#080808] md:min-h-[420px]"
+      className="relative flex min-h-[240px] items-center justify-center overflow-hidden bg-[#080808]"
       aria-hidden
     >
-      <div className="signature-mobile-grid absolute inset-0 opacity-30" />
-      <div className="relative border border-white/20 px-10 py-14">
-        <span className="absolute -top-px -left-px h-4 w-px bg-white/50" />
-        <span className="absolute -top-px -left-px h-px w-4 bg-white/50" />
-        <span className="absolute -right-px -bottom-px h-4 w-px bg-white/50" />
-        <span className="absolute -right-px -bottom-px h-px w-4 bg-white/50" />
-        <p className="text-[10px] tracking-[0.45em] text-zinc-500">INTERACTION</p>
-        <p className="mt-4 text-4xl font-semibold tracking-tight text-white/90">KV</p>
+      <div className="relative h-28 w-28 border border-white/15">
+        <div className="absolute inset-3 rounded-full bg-white/90" />
       </div>
     </div>
   );
@@ -168,7 +124,7 @@ export function InteractiveObject({ className = "" }: Props) {
 
   if (mobile) {
     return (
-      <div className={`border-t border-white/10 lg:border-t-0 lg:border-l ${className}`}>
+      <div className={`border-t border-white/10 ${className}`}>
         <MobileSignatureFallback />
       </div>
     );
@@ -177,9 +133,9 @@ export function InteractiveObject({ className = "" }: Props) {
   return (
     <div
       data-cursor="play"
-      className={`relative min-h-[min(56vh,560px)] border-t border-white/10 bg-[#080808] ${className}`}
+      className={`relative min-h-[min(42vh,420px)] border-t border-white/10 bg-[#080808] ${className}`}
     >
-      <Canvas camera={{ position: [0, 0, 3.6], fov: 40 }} dpr={[1, 1.4]} gl={{ antialias: true, powerPreference: "high-performance" }}>
+      <Canvas camera={{ position: [0, 0, 3.2], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true }}>
         <color attach="background" args={["#080808"]} />
         <Scene pointer={pointer} />
       </Canvas>

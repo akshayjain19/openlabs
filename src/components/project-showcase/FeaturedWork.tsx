@@ -1,94 +1,107 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
 import type { Project } from "@/content/projects";
-import { ProjectMedia } from "@/components/work/ProjectMedia";
+import { ProjectImage } from "@/components/work/ProjectImage";
 
-function FeaturedVisual({ project }: { project: Project }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const sx = useSpring(mx, { stiffness: 140, damping: 20 });
-  const sy = useSpring(my, { stiffness: 140, damping: 20 });
+function ProjectTitle({ project }: { project: Project }) {
+  const title = project.name;
+  if (project.href) {
+    return (
+      <Link
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:opacity-75"
+      >
+        {title}
+      </Link>
+    );
+  }
+  return title;
+}
 
+function ProjectMeta({ project }: { project: Project }) {
   return (
-    <motion.div
-      ref={ref}
-      data-cursor="project"
-      style={{ x: sx, y: sy }}
-      onMouseMove={(e) => {
-        const rect = ref.current?.getBoundingClientRect();
-        if (!rect) return;
-        mx.set(((e.clientX - rect.left) / rect.width - 0.5) * 10);
-        my.set(((e.clientY - rect.top) / rect.height - 0.5) * 8);
-      }}
-      onMouseLeave={() => {
-        mx.set(0);
-        my.set(0);
-      }}
-      className="group relative mt-4 overflow-hidden border border-white/10"
-    >
-      {project.image ? (
-        <Image
-          src={project.image}
-          alt={project.imageAlt}
-          width={1600}
-          height={900}
-          className="h-auto w-full object-cover grayscale transition duration-700 group-hover:grayscale-[0.15]"
-          sizes="(max-width: 768px) 100vw, 1200px"
-        />
-      ) : (
-        <ProjectMedia project={project} className="!aspect-[16/9]" />
-      )}
-    </motion.div>
+    <>
+      <h3 className="text-[clamp(1.35rem,2.2vw,2.5rem)] font-semibold leading-tight tracking-[-0.03em]">
+        <ProjectTitle project={project} />
+      </h3>
+      <p className="mt-1 text-[10px] tracking-[0.32em] text-zinc-500 uppercase">{project.type}</p>
+      <p className="mt-2 max-w-md text-sm text-zinc-500">
+        {project.proofLine ?? project.outcome ?? project.description}
+      </p>
+    </>
   );
 }
 
+function Visual({ project, className = "" }: { project: Project; className?: string }) {
+  const src = project.image;
+  if (!src) return null;
+  return (
+    <div
+      data-cursor="project"
+      className={`group relative overflow-hidden rounded-sm ${className}`}
+    >
+      <ProjectImage src={src} alt={project.imageAlt} className="max-h-[min(42vh,520px)] object-cover object-top" />
+    </div>
+  );
+}
+
+function VariantA({ project }: { project: Project }) {
+  return (
+    <article className="grid gap-5 md:grid-cols-[minmax(0,0.42fr)_minmax(0,1fr)] md:items-end md:gap-8">
+      <ProjectMeta project={project} />
+      <Visual project={project} />
+    </article>
+  );
+}
+
+function VariantB({ project }: { project: Project }) {
+  return (
+    <article className="space-y-4">
+      <Visual project={project} />
+      <ProjectMeta project={project} />
+    </article>
+  );
+}
+
+function VariantC({ project }: { project: Project }) {
+  return (
+    <article className="grid gap-5 md:grid-cols-2 md:items-center md:gap-10">
+      <Visual project={project} className="md:order-2" />
+      <div className="md:order-1">
+        <ProjectMeta project={project} />
+      </div>
+    </article>
+  );
+}
+
+const layoutBySlug: Record<string, "a" | "b" | "c"> = {
+  viacation: "a",
+  "indore-nursery": "b",
+  "sg11-fantasy": "c",
+  "the-laundry-house": "c",
+};
+
 export function FeaturedWork({ projects }: { projects: Project[] }) {
   return (
-    <section className="border-b border-white/10 py-12 md:py-16">
+    <section className="border-b border-white/10 py-[70px] md:py-[90px]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.04em]">
+        <h2 className="text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold tracking-[-0.04em]">
           THINGS WE&apos;VE BUILT.
         </h2>
-        <div className="mt-10 space-y-14 md:mt-12 md:space-y-16">
+        <div className="mt-8 space-y-[50px] md:mt-10 md:space-y-[72px]">
           {projects.map((project) => {
-            const title = project.href ? (
-              <Link
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-70"
-              >
-                {project.name}
-              </Link>
-            ) : (
-              project.name
-            );
-            const proofLine = project.proof?.[0] ?? project.outcome ?? project.description;
-
-            return (
-              <article key={project.slug}>
-                <div className="flex flex-wrap items-baseline justify-between gap-4">
-                  <div>
-                    <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h3>
-                    <p className="mt-1 text-[10px] tracking-[0.35em] text-zinc-500 uppercase">
-                      {project.type}
-                    </p>
-                  </div>
-                  <p className="max-w-sm text-right text-sm text-zinc-500">{proofLine}</p>
-                </div>
-                <FeaturedVisual project={project} />
-              </article>
-            );
+            const variant = layoutBySlug[project.slug] ?? "a";
+            if (variant === "b") return <VariantB key={project.slug} project={project} />;
+            if (variant === "c") return <VariantC key={project.slug} project={project} />;
+            return <VariantA key={project.slug} project={project} />;
           })}
         </div>
         <Link
           href="/work"
-          className="mt-12 inline-block text-[10px] tracking-[0.3em] text-zinc-500 hover:text-white"
+          className="mt-10 inline-block text-[10px] tracking-[0.3em] text-zinc-500 hover:text-white"
         >
           VIEW ALL WORK →
         </Link>

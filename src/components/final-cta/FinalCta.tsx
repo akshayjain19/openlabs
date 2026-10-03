@@ -4,14 +4,13 @@ import { whatsAppLink } from "@/lib/utils";
 
 export function FinalCta() {
   return (
-    <section className="relative border-t border-white/10 bg-[#030303] py-24 md:py-32">
+    <section className="relative border-t border-white/10 bg-[#030303] py-[70px] md:py-[100px]">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
         <h2 className="text-[clamp(2.75rem,10vw,7rem)] font-semibold leading-[0.88] tracking-[-0.05em]">
           HAVE SOMETHING
           <br />
           TO BUILD?
         </h2>
-        <p className="mt-8 text-sm text-zinc-500 md:text-base">Tell us what&apos;s on your mind.</p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
             href={whatsAppLink("Hi KorvaLabs — I have something to build.")}
@@ -28,6 +27,7 @@ export function FinalCta() {
             EMAIL US →
           </Link>
         </div>
+        <p className="mt-6 text-xs text-zinc-500">{site.email.address}</p>
       </div>
     </section>
   );

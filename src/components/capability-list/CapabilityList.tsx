@@ -1,16 +1,22 @@
 import { capabilities } from "@/content/site";
 
 export function CapabilityList() {
+  const row1 = capabilities.slice(0, 3).join(" · ");
+  const row2 = capabilities.slice(3, 6).join(" · ");
+  const row3 = capabilities.slice(6).join(" · ");
+
   return (
-    <section className="border-b border-white/10 py-10 md:py-12">
+    <section className="border-b border-white/10 py-12 md:py-14">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <p className="text-lg font-semibold tracking-tight text-white md:text-xl">NOT JUST WEBSITES.</p>
-        <p className="mt-2 max-w-lg text-sm text-zinc-500">
-          Apps, platforms and software built around how your business actually works.
+        <h2 className="text-lg font-semibold tracking-[0.08em] text-white md:text-xl">WHAT WE BUILD.</h2>
+        <p className="mt-4 max-w-2xl text-[11px] leading-relaxed tracking-[0.22em] text-zinc-400 md:text-xs">
+          {row1}
+          <br />
+          {row2}
+          <br />
+          {row3}
         </p>
-        <p className="mt-6 text-[10px] leading-relaxed tracking-[0.22em] text-zinc-500 md:text-[11px]">
-          {capabilities.join(" · ")}
-        </p>
+        <p className="mt-4 text-sm text-zinc-500">Software for products, operations and growth.</p>
       </div>
     </section>
   );
