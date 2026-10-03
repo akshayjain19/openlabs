@@ -61,7 +61,7 @@ const organizationJsonLd = {
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    telephone: site.whatsapp.display,
+    email: site.email.address,
     availableLanguage: ["English"],
   },
 };

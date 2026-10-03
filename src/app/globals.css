@@ -66,12 +66,42 @@ body.custom-cursor-active button {
 }
 
 .cursor-ring {
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 9999px;
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    margin 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cursor-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring[data-mode="view"],
+.cursor-ring[data-mode="talk"],
+.cursor-ring[data-mode="play"] {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+}
+
+.cursor-ring[data-mode="view"] .cursor-label,
+.cursor-ring[data-mode="talk"] .cursor-label,
+.cursor-ring[data-mode="play"] .cursor-label {
+  opacity: 1;
 }
 
 .cursor-ring[data-state="magnetic"] {
@@ -96,6 +126,38 @@ body.custom-cursor-active button {
   font-weight: 600;
   letter-spacing: -0.03em;
   color: rgba(255, 255, 255, 0.12);
+}
+
+.marquee-item-strong {
+  color: rgba(255, 255, 255, 0.2);
+  padding-right: 4rem;
+}
+
+.marquee-slow .marquee-track {
+  animation-duration: 48s;
+}
+
+.signature-mobile-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: grid-drift 24s linear infinite;
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-48px, -48px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-mobile-grid {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

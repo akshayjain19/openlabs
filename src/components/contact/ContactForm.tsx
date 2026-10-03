@@ -35,7 +35,7 @@ export function ContactForm() {
   if (sent) {
     return (
       <p className="border border-white/10 p-6 text-sm text-zinc-400">
-        WhatsApp should be open with your message. If not, message us at {site.whatsapp.display}.
+        WhatsApp should be open with your message. You can also email {site.email.address}.
       </p>
     );
   }

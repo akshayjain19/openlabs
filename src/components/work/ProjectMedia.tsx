@@ -1,4 +1,5 @@
 import type { Project } from "@/content/projects";
+import { cn } from "@/lib/utils";
 
 type Props = {
   project: Project;
@@ -7,6 +8,7 @@ type Props = {
 
 export function ProjectMedia({ project, className = "" }: Props) {
   const label = project.name.replace(/\s+/g, " ");
+  const fill = className.includes("min-h-full") || className.includes("!aspect-auto");
 
   if (project.image) {
     return (
@@ -14,7 +16,11 @@ export function ProjectMedia({ project, className = "" }: Props) {
       <img
         src={project.image}
         alt={project.imageAlt}
-        className={`aspect-[16/10] w-full object-cover grayscale transition duration-700 group-hover:grayscale-0 ${className}`}
+        className={cn(
+          "w-full object-cover grayscale transition duration-700 group-hover:grayscale-[0.2]",
+          fill ? "h-full min-h-[240px]" : "aspect-[16/10]",
+          className,
+        )}
         loading="lazy"
       />
     );
@@ -22,7 +28,11 @@ export function ProjectMedia({ project, className = "" }: Props) {
 
   return (
     <div
-      className={`relative aspect-[16/10] w-full overflow-hidden bg-[#101010] ${className}`}
+      className={cn(
+        "relative w-full overflow-hidden bg-[#101010]",
+        fill ? "h-full min-h-[240px]" : "aspect-[16/10]",
+        className,
+      )}
       role="img"
       aria-label={project.imageAlt}
     >
@@ -32,7 +42,6 @@ export function ProjectMedia({ project, className = "" }: Props) {
           {label}
         </p>
       </div>
-      <div className="absolute top-6 right-6 text-[10px] tracking-[0.3em] text-zinc-600">KORVALABS</div>
     </div>
   );
 }
