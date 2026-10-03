@@ -9,52 +9,52 @@ export const services: Service[] = [
   {
     id: "web",
     title: "WEB",
-    description: "Build websites, marketplaces, portals and web applications.",
-    bullets: ["Customer platforms", "Admin & ops tools", "Integrations", "Performance work"],
+    description: "Websites, marketplaces, portals and web applications.",
+    bullets: ["Product web apps", "Marketplaces", "Portals", "Integrations"],
   },
   {
     id: "mobile",
     title: "MOBILE",
-    description: "Android and iOS products with robust backend architecture.",
-    bullets: ["Native & cross-platform", "Release-ready delivery", "Engagement flows"],
+    description: "Android and iOS products backed by robust architecture.",
+    bullets: ["iOS & Android", "Cross-platform", "Backend-connected apps"],
   },
   {
     id: "ai",
     title: "AI",
     description:
-      "AI-enabled products, copilots, RAG systems, agents, document intelligence and product features.",
-    bullets: ["Copilots & assistants", "RAG", "Classification", "Product-native AI"],
+      "AI-enabled products, RAG systems, agents, copilots, document intelligence and intelligent product features.",
+    bullets: ["RAG & agents", "Copilots", "Document intelligence", "Product features"],
   },
   {
     id: "automation",
     title: "AUTOMATION",
     description:
-      "Operational workflows, integrations, CRM automation, internal systems and AI-powered automation.",
-    bullets: ["Workflow orchestration", "CRM & lead routing", "Internal tooling"],
+      "Workflow automation, integrations, CRM workflows, internal tools and AI-powered operations.",
+    bullets: ["CRM workflows", "Internal tools", "Orchestration", "AI operations"],
   },
   {
     id: "saas",
     title: "SAAS",
-    description: "MVPs and full SaaS products designed to grow.",
-    bullets: ["MVP delivery", "Subscription foundations", "Iteration after launch"],
+    description: "MVPs and SaaS products designed to grow.",
+    bullets: ["MVP delivery", "Subscription-ready foundations", "Iteration"],
   },
   {
     id: "product-engineering",
     title: "PRODUCT ENGINEERING",
     description: "Architecture, APIs, databases, infrastructure and ongoing product development.",
-    bullets: ["System design", "APIs & data", "Long-term engineering"],
+    bullets: ["System design", "APIs", "Infrastructure", "Long-term engineering"],
   },
   {
     id: "geo-aeo",
     title: "GEO / AEO",
     description:
-      "Design content and technical structures so products and brands are easier for modern search and AI systems to discover, understand and cite.",
+      "Technical and content structures designed to improve discoverability across search engines and AI-driven discovery systems.",
     bullets: ["Structured content", "Technical SEO", "Entity clarity"],
   },
   {
     id: "data",
     title: "DATA + INTERNAL TOOLS",
-    description: "Dashboards, internal platforms, workflows and analytics systems.",
-    bullets: ["Reporting", "Pipelines", "Operational analytics"],
+    description: "Dashboards, analytics systems and internal operating software.",
+    bullets: ["Dashboards", "Analytics", "Internal platforms"],
   },
 ];

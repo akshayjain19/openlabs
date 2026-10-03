@@ -1,9 +1,9 @@
 export const site = {
-  name: "OPENLABS",
+  name: "KORVALABS",
   tagline: "Build what's next.",
   description:
-    "OpenLabs is a premium product engineering studio — web products, mobile apps, AI systems, automation, and SaaS for startups and SMBs.",
-  url: "https://openlabs.dev",
+    "KorvaLabs is a premium product engineering and digital product studio — web products, mobile apps, AI systems, automation, and SaaS for startups and SMBs worldwide.",
+  url: "https://korvalabs.dev",
   whatsapp: {
     display: "+91 84410 78510",
     e164: "918441078510",
@@ -26,7 +26,7 @@ export const buildFor = [
   {
     id: "mvp",
     label: "MVP",
-    text: "Validate quickly without building throwaway software.",
+    text: "Validate quickly without creating throwaway software.",
   },
   {
     id: "growth",
@@ -36,32 +36,32 @@ export const buildFor = [
   {
     id: "automation",
     label: "AUTOMATION",
-    text: "Replace repetitive operational work with software and AI.",
+    text: "Turn repetitive operational work into software and AI-powered workflows.",
   },
 ] as const;
 
 export const principles = [
   {
     num: "01",
-    text: "Understand the business.",
+    text: "UNDERSTAND THE BUSINESS.",
   },
   {
     num: "02",
-    text: "Choose the simplest architecture that can survive the next stage.",
+    text: "CHOOSE THE SIMPLEST ARCHITECTURE THAT CAN SURVIVE THE NEXT STAGE.",
   },
   {
     num: "03",
-    text: "Ship. Measure. Improve.",
+    text: "SHIP.\nMEASURE.\nIMPROVE.",
   },
 ] as const;
 
 export const whatWeBuild = [
   { num: "01", label: "WEB", hint: "Websites, marketplaces, portals and web applications." },
-  { num: "02", label: "MOBILE", hint: "Android and iOS products with robust backend architecture." },
-  { num: "03", label: "AI", hint: "Copilots, RAG, agents, and AI-native product features." },
-  { num: "04", label: "AUTOMATION", hint: "Workflows, integrations, and operational systems." },
+  { num: "02", label: "MOBILE", hint: "Android and iOS products backed by robust architecture." },
+  { num: "03", label: "AI", hint: "AI-enabled products, RAG, agents, copilots and intelligent features." },
+  { num: "04", label: "AUTOMATION", hint: "Workflow automation, integrations and operational systems." },
   { num: "05", label: "SAAS", hint: "MVPs and SaaS products designed to grow." },
-  { num: "06", label: "PRODUCT ENGINEERING", hint: "Architecture, APIs, and ongoing product development." },
-  { num: "07", label: "GEO / AEO", hint: "Structures for modern search and answer-engine discovery." },
-  { num: "08", label: "DATA + INTERNAL TOOLS", hint: "Dashboards, workflows, and analytics systems." },
+  { num: "06", label: "PRODUCT ENGINEERING", hint: "Architecture, APIs, infrastructure and ongoing development." },
+  { num: "07", label: "GEO / AEO", hint: "Discoverability across search engines and AI-driven discovery." },
+  { num: "08", label: "DATA + INTERNAL TOOLS", hint: "Dashboards, analytics and internal operating software." },
 ] as const;

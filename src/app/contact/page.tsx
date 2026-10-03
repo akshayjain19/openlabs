@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/contact/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Start a conversation with OpenLabs about your product, app, or automation project.",
+  description: "Start a conversation with KorvaLabs about your product, app, or automation project.",
   alternates: { canonical: "/contact" },
 };
 
@@ -25,7 +25,7 @@ export default function ContactPage() {
             use the form and we&apos;ll open a pre-filled message for you.
           </p>
           <Link
-            href={whatsAppLink("Hi OpenLabs — I'd like to start a conversation.")}
+            href={whatsAppLink("Hi KorvaLabs — I'd like to start a conversation.")}
             data-magnetic
             className="mt-10 inline-flex border border-white bg-white px-6 py-3 text-xs font-medium tracking-[0.2em] text-black hover:bg-zinc-200"
           >

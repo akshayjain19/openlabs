@@ -1,4 +1,4 @@
-export type ProjectCategory = "openlabs" | "experience";
+export type ProjectCategory = "korvalabs" | "experience";
 
 export type ProjectLayout = "feature" | "split" | "tall" | "horizontal";
 
@@ -16,69 +16,69 @@ export type Project = {
   highlights?: string[];
 };
 
-export const openlabsProjects: Project[] = [
+export const korvaLabsProjects: Project[] = [
   {
     slug: "indore-nursery",
     name: "INDORE NURSERY",
-    category: "openlabs",
+    category: "korvalabs",
     type: "E-commerce / Commerce",
     layout: "feature",
     description:
-      "A commerce experience for a plant nursery, including catalogue browsing, product discovery, shopping flows and local fulfilment.",
+      "A commerce experience for a plant nursery with product discovery, catalogue browsing, shopping flows and local fulfilment.",
     href: "https://indorenursery.com/",
     imageAlt: "Indore Nursery commerce platform",
-    highlights: ["Catalogue", "Commerce flows", "Local fulfilment"],
+    highlights: ["Catalogue", "Commerce", "Fulfilment"],
   },
   {
     slug: "tattvasri",
     name: "TATTVASRI",
-    category: "openlabs",
+    category: "korvalabs",
     type: "E-commerce / Lifestyle",
     layout: "split",
     description:
       "Digital commerce experience for a spiritual lifestyle brand, including product discovery and WhatsApp-led commerce.",
     href: "https://tattvasri.com/",
     imageAlt: "Tattvasri lifestyle commerce experience",
-    highlights: ["Product discovery", "WhatsApp commerce"],
+    highlights: ["Commerce", "WhatsApp-led flows"],
   },
   {
     slug: "viacation",
     name: "VIACATION",
-    category: "openlabs",
-    type: "Travel / Travel technology",
-    layout: "horizontal",
+    category: "korvalabs",
+    type: "Travel / Travel Technology",
+    layout: "tall",
     description:
       "Travel discovery and marketplace experience spanning destinations, packages, search and lead-generation flows.",
     href: "https://viacation.com/",
     imageAlt: "Viacation travel platform",
-    highlights: ["Destinations", "Packages", "Lead generation"],
+    highlights: ["Marketplace", "Search", "Lead generation"],
   },
   {
     slug: "sg11-fantasy",
     name: "SG11 FANTASY",
-    category: "openlabs",
-    type: "Fantasy sports / Consumer product",
-    layout: "tall",
+    category: "korvalabs",
+    type: "Fantasy Sports / Consumer Product",
+    layout: "split",
     description: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
     imageAlt: "SG11 Fantasy sports product",
-    highlights: ["Consumer app", "Fantasy sports"],
+    highlights: ["Consumer product", "Fantasy sports"],
   },
   {
     slug: "travel-deal-online",
     name: "TRAVEL DEAL ONLINE",
-    category: "openlabs",
-    type: "Travel marketplace",
-    layout: "split",
+    category: "korvalabs",
+    type: "Travel Marketplace",
+    layout: "horizontal",
     description: "Travel deal and discovery platform.",
     imageAlt: "Travel Deal Online marketplace product",
-    highlights: ["Deal discovery", "Travel marketplace"],
+    highlights: ["Deals", "Discovery"],
   },
   {
     slug: "mobile-game",
     name: "MOBILE GAME",
-    category: "openlabs",
-    type: "Consumer mobile product",
+    category: "korvalabs",
+    type: "Consumer Mobile Product",
     layout: "tall",
     description: "Casual mobile game product.",
     note: "Not represented as a currently live public release.",
@@ -88,11 +88,10 @@ export const openlabsProjects: Project[] = [
   {
     slug: "gaming-platform",
     name: "GAMING PLATFORM",
-    category: "openlabs",
-    type: "Interactive entertainment",
+    category: "korvalabs",
+    type: "Interactive Entertainment",
     layout: "horizontal",
-    description:
-      "Older casino and poker-related source-code projects — interactive entertainment engineering.",
+    description: "Older casino and poker-related mobile and product work.",
     note: "Not represented as currently live commercial products.",
     imageAlt: "Gaming platform engineering work",
     highlights: ["Gaming", "Legacy platforms"],
@@ -107,12 +106,12 @@ export const experienceProjects: Project[] = [
     type: "Professional experience",
     layout: "feature",
     description:
-      "OpenLabs is built by people who have worked across product and technology teams at scale — shipping, operating, and improving software in complex environments.",
-    imageAlt: "Team professional experience at scale",
+      "Experience across product and technology teams at scale — shipping, operating, and improving software in complex environments.",
+    imageAlt: "Professional experience at scale",
   },
 ];
 
-export const allProjects = [...openlabsProjects, ...experienceProjects];
+export const allProjects = [...korvaLabsProjects, ...experienceProjects];
 
 export function getProject(slug: string) {
   return allProjects.find((p) => p.slug === slug);

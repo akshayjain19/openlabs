@@ -85,7 +85,7 @@ export function SiteHeader() {
                 </Link>
               ))}
               <Link
-                href={whatsAppLink("Hi OpenLabs — I'd like to talk about a project.")}
+                href={whatsAppLink("Hi KorvaLabs — I'd like to talk about a project.")}
                 className="pt-4 text-2xl font-medium tracking-wide text-zinc-300"
                 onClick={() => setOpen(false)}
               >
@@ -102,7 +102,7 @@ export function SiteHeader() {
 function MagneticContact() {
   return (
     <Link
-      href={whatsAppLink("Hi OpenLabs — I'd like to talk about a project.")}
+      href={whatsAppLink("Hi KorvaLabs — I'd like to talk about a project.")}
       data-magnetic
       className="group relative text-xs font-medium tracking-[0.2em] text-white"
     >
