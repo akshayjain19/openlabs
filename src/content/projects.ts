@@ -10,7 +10,7 @@ export type Project = {
   slug: string;
   name: string;
   category: ProjectCategory;
-  type: string;
+  type: "web" | "app" | "hybrid";
   description: string;
   outcome?: string;
   href?: string;
@@ -19,6 +19,7 @@ export type Project = {
   desktopImage?: string;
   mobileWebImage?: string;
   appImages?: string[];
+  crmImage?: string;
   gallery?: string[];
   imageAlt: string;
   note?: string;
@@ -37,7 +38,7 @@ export const korvaLabsProjects: Project[] = [
     slug: "viacation",
     name: "VIACATION",
     category: "korvalabs",
-    type: "Travel product",
+    type: "app",
     layout: "tall",
     featured: true,
     leadPriority: 100,
@@ -45,39 +46,37 @@ export const korvaLabsProjects: Project[] = [
     outcome: "Search, packages, and lead-generation flows.",
     proofLine: "Search + discovery for a travel marketplace.",
     href: "https://viacation.com/",
-    desktopImage: projectDesktopPath("viacation"),
-    image: projectDesktopPath("viacation"),
+    appImages: [],
     gallery: projectGallery("viacation"),
     imageAlt: "Viacation travel platform",
-    proof: ["Search + discovery", "Marketplace architecture", "Built end-to-end"],
   },
   {
     slug: "our-shopee",
     name: "OURSHOPEE",
     category: "korvalabs",
-    type: "Feature development / Selected product work",
+    type: "web",
     layout: "feature",
     featured: false,
-    leadPriority: 85,
+    leadPriority: 20,
     description: "Selected marketplace feature development on a live multi-seller product.",
     outcome: "Scoped product engineering — not full product ownership.",
-    proofLine: "Selected marketplace feature development.",
+    proofLine: "SELECTED FEATURE DEVELOPMENT",
     href: "https://www.ourshopee.com/",
     desktopImage: projectDesktopPath("our-shopee"),
     mobileWebImage: projectMobileWebPath("our-shopee"),
     image: projectDesktopPath("our-shopee"),
     gallery: projectGallery("our-shopee"),
     imageAlt: "OurShopee marketplace — selected feature work",
-    proof: ["Marketplace features", "Product engineering"],
+    proof: ["SELECTED FEATURE DEVELOPMENT"],
   },
   {
     slug: "indore-nursery",
     name: "INDORE NURSERY",
     category: "korvalabs",
-    type: "Commerce",
+    type: "web",
     layout: "feature",
     featured: true,
-    leadPriority: 90,
+    leadPriority: 95,
     description: "Commerce for a plant nursery with catalogue and local fulfilment.",
     outcome: "Built for organic discovery and local commerce.",
     proofLine: "Built for organic discovery and local commerce.",
@@ -87,40 +86,36 @@ export const korvaLabsProjects: Project[] = [
     image: projectDesktopPath("indore-nursery"),
     gallery: projectGallery("indore-nursery"),
     imageAlt: "Indore Nursery commerce platform",
-    proof: ["Multi-step commerce flow", "Catalogue at scale", "Built end-to-end"],
   },
   {
     slug: "sg11-fantasy",
     name: "SG11 FANTASY",
     category: "korvalabs",
-    type: "Consumer product",
+    type: "app",
     layout: "split",
     featured: true,
-    leadPriority: 80,
+    leadPriority: 90,
     description: "Consumer fantasy sports product experience.",
     outcome: "High-engagement consumer product flows.",
     proofLine: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
-    desktopImage: projectDesktopPath("sg11-fantasy"),
     appImages: [
       "/projects/sg11-fantasy/app-1.webp",
       "/projects/sg11-fantasy/app-2.webp",
       "/projects/sg11-fantasy/app-3.webp",
     ],
-    image: projectDesktopPath("sg11-fantasy"),
     gallery: projectGallery("sg11-fantasy"),
     imageAlt: "SG11 Fantasy sports product",
-    proof: ["Consumer app experience", "Complex user flows"],
   },
   {
     slug: "the-laundry-house",
     name: "THE LAUNDRY HOUSE",
     category: "korvalabs",
-    type: "Service business",
+    type: "web",
     layout: "split",
     featured: true,
     /** Fourth featured homepage slot; higher values rank first site-wide */
-    leadPriority: 75,
+    leadPriority: 85,
     description:
       "A premium digital experience for a garment-care business, bringing service discovery, booking, doorstep pickup and delivery, store discovery, and franchise enquiries into one platform.",
     outcome: "Garment-care across 9 major cities — discovery, booking, and enquiries.",
@@ -131,27 +126,43 @@ export const korvaLabsProjects: Project[] = [
     image: projectDesktopPath("the-laundry-house"),
     gallery: projectGallery("the-laundry-house"),
     imageAlt: "The Laundry House digital experience for garment care",
-    proof: ["Service discovery", "Booking flow", "Store locator", "Lead generation"],
   },
   {
-    slug: "travel-deal-online",
-    name: "TRAVEL DEAL ONLINE",
+    slug: "usmara-coffee",
+    name: "USMARA COFFEE",
     category: "korvalabs",
-    type: "Travel",
+    type: "hybrid",
+    layout: "feature",
+    featured: true,
+    leadPriority: 80,
+    description: "Premium coffee ecommerce experience with an internal system placeholder.",
+    href: "https://usmaracoffee.com/",
+    desktopImage: projectDesktopPath("usmara-coffee"),
+    mobileWebImage: projectMobileWebPath("usmara-coffee"),
+    image: projectDesktopPath("usmara-coffee"),
+    gallery: projectGallery("usmara-coffee"),
+    imageAlt: "Usmara Coffee ecommerce experience",
+  },
+  {
+    slug: "apes-together-strong",
+    name: "APES TOGETHER STRONG",
+    category: "korvalabs",
+    type: "web",
     layout: "horizontal",
     featured: false,
     leadPriority: 70,
-    description: "Travel deal and discovery platform.",
-    outcome: "Deal discovery and travel marketplace flows.",
-    proofLine: "Travel deal discovery and marketplace flows.",
-    imageAlt: "Travel Deal Online marketplace product",
-    proof: ["Travel marketplace", "Discovery flows"],
+    description: "Public website hero visual.",
+    href: "https://apes-together-strong.vercel.app/",
+    desktopImage: projectDesktopPath("apes-together-strong"),
+    image: projectDesktopPath("apes-together-strong"),
+    gallery: projectGallery("apes-together-strong"),
+    imageAlt: "Apes Together Strong website",
   },
   {
     slug: "tattvasri",
     name: "TATTVASRI",
     category: "korvalabs",
-    type: "Commerce",
+    type: "web",
     layout: "split",
     featured: false,
     leadPriority: 50,
@@ -164,31 +175,18 @@ export const korvaLabsProjects: Project[] = [
     image: projectDesktopPath("tattvasri"),
     gallery: projectGallery("tattvasri"),
     imageAlt: "Tattvasri lifestyle commerce experience",
-    proof: ["WhatsApp-led commerce", "Product discovery"],
   },
   {
-    slug: "mobile-game",
-    name: "MOBILE GAME",
+    slug: "mobile-games",
+    name: "MOBILE GAMES",
     category: "korvalabs",
-    type: "Consumer mobile",
+    type: "app",
     layout: "tall",
     featured: false,
-    leadPriority: 20,
-    description: "Casual mobile game product.",
-    note: "Not represented as a currently live public release.",
-    imageAlt: "Mobile game product work",
-  },
-  {
-    slug: "gaming-platform",
-    name: "GAMING PLATFORM",
-    category: "korvalabs",
-    type: "Interactive entertainment",
-    layout: "horizontal",
-    featured: false,
-    leadPriority: 10,
-    description: "Older casino and poker-related product work.",
-    note: "Not represented as currently live commercial products.",
-    imageAlt: "Gaming platform engineering work",
+    leadPriority: 30,
+    description: "Mobile game product and source-code experience.",
+    appImages: [],
+    imageAlt: "Mobile games product work",
   },
 ];
 
@@ -197,7 +195,7 @@ export const experienceProjects: Project[] = [
     slug: "team-scale",
     name: "PRODUCT & PLATFORM TEAMS",
     category: "experience",
-    type: "Professional experience",
+    type: "web",
     layout: "feature",
     description:
       "Experience across product and technology teams at scale — shipping and operating software in complex environments.",
@@ -207,7 +205,7 @@ export const experienceProjects: Project[] = [
 
 export const allProjects = [...korvaLabsProjects, ...experienceProjects];
 
-export function getFeaturedHomeProjects(limit = 4) {
+export function getFeaturedHomeProjects(limit = 5) {
   return korvaLabsProjects
     .filter((p) => p.featured)
     .sort((a, b) => (b.leadPriority ?? 0) - (a.leadPriority ?? 0))

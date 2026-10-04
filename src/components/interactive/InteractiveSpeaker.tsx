@@ -1,32 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox, Text } from "@react-three/drei";
 import * as THREE from "three";
 import { useAmbientAudio } from "@/hooks/useAmbientAudio";
-
-function subscribeReduced(onStoreChange: () => void) {
-  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-  mq.addEventListener("change", onStoreChange);
-  return () => mq.removeEventListener("change", onStoreChange);
-}
-
-function getReduced() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function subscribeMobile(onStoreChange: () => void) {
-  const mq = window.matchMedia("(max-width: 768px)");
-  mq.addEventListener("change", onStoreChange);
-  return () => mq.removeEventListener("change", onStoreChange);
-}
-
-function getMobile() {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(max-width: 768px)").matches;
-}
 
 function useGrilleTexture() {
   return useMemo(() => {
@@ -277,6 +255,8 @@ function Scene({
   );
 }
 
+// Kept for a future WebGL re-enable; the visible speaker uses the resilient CSS body below.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function SpeakerCanvas({
   playing,
   reducedMotion,
@@ -317,10 +297,7 @@ type Props = {
 
 export function InteractiveSpeaker({ className = "", variant = "section" }: Props) {
   const { playing, blocked, turnOn, turnOff } = useAmbientAudio("/audio/pondering.mp3");
-  const reducedMotion = useSyncExternalStore(subscribeReduced, getReduced, () => false);
-  const mobile = useSyncExternalStore(subscribeMobile, getMobile, () => true);
-  const dpr = mobile ? 1.25 : 1.5;
-  const [cursorHint, setCursorHint] = useState<"play" | "on" | "off">("play");
+  const cursorHint = "play";
 
   const handleOn = useCallback(() => {
     void turnOn();
@@ -330,26 +307,48 @@ export function InteractiveSpeaker({ className = "", variant = "section" }: Prop
     turnOff();
   }, [turnOff]);
 
-  const onHoverControl = useCallback((c: "on" | "off" | null) => {
-    setCursorHint(c ?? "play");
-  }, []);
-
   const sizeClass =
     variant === "hero"
       ? "min-h-[280px] md:min-h-[360px] lg:min-h-[420px]"
       : "min-h-[min(52vh,480px)] lg:min-h-[min(58vh,560px)]";
 
   return (
-    <div className={`relative flex w-full flex-col items-center ${sizeClass} ${className}`} data-cursor={cursorHint}>
-      <div className="w-full flex-1 min-h-0">
-        <SpeakerCanvas
-          playing={playing}
-          reducedMotion={reducedMotion}
-          onPressOn={handleOn}
-          onPressOff={handleOff}
-          dpr={dpr}
-          onHoverControl={onHoverControl}
-        />
+    <div
+      className={`relative flex w-full flex-col items-center ${sizeClass} ${className}`}
+      style={{ display: "flex", width: "100%" }}
+    >
+      <div className="relative flex min-h-[260px] w-full flex-1 items-center justify-center" data-cursor={cursorHint}>
+        <div
+          className={`relative z-10 aspect-[1.9/1] w-[min(92%,520px)] rounded-[2rem] border border-[#e8d9bd]/35 bg-[#b98858] p-[3.2%] shadow-[0_28px_90px_rgba(0,0,0,0.42)] transition-transform duration-300 ${
+            playing ? "scale-[1.012]" : ""
+          }`}
+          aria-hidden
+        >
+          <div className="absolute -top-[13%] left-1/2 h-[22%] w-[42%] -translate-x-1/2 rounded-t-full border-t-[10px] border-r-[10px] border-l-[10px] border-[#cdbb8a]" />
+          <div className="grid h-full grid-cols-[1.1fr_0.9fr] gap-[4%] rounded-[1.45rem] border border-black/15 bg-[#eadfc8] p-[4%]">
+            <div className="relative overflow-hidden rounded-[1rem] bg-[#141311] shadow-inner">
+              <div className="absolute inset-0 opacity-45 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.35)_1px,transparent_1.6px)] [background-size:12px_12px]" />
+              <div
+                className={`absolute top-1/2 left-1/2 aspect-square w-[45%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#d8c883]/30 bg-[#111] shadow-[inset_0_0_0_10px_rgba(255,255,255,0.03)] ${
+                  playing ? "animate-[speaker-pulse_0.7s_ease-in-out_infinite]" : ""
+                }`}
+              />
+            </div>
+            <div className="relative flex flex-col justify-between rounded-[1rem] bg-[#211915] p-[8%]">
+              <div className="h-[18%] rounded-md border border-[#d8c883]/25 bg-[#111]">
+                <div className={`mt-[7%] ml-[8%] h-[28%] w-[58%] rounded-sm ${playing ? "bg-[#d8c883]/70" : "bg-[#5b4b33]/45"}`} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span className={`h-3 w-3 rounded-full ${playing ? "bg-[#d8c883] shadow-[0_0_18px_rgba(216,200,131,0.8)]" : "bg-[#5b4b33]"}`} />
+                <div className="aspect-square w-[48%] rounded-full border border-[#d8c883]/50 bg-[#eadfc8] shadow-[inset_0_0_0_10px_rgba(0,0,0,0.08)]" />
+              </div>
+              <div className="flex justify-end gap-2">
+                <span className="h-4 w-10 rounded-full bg-[#eadfc8]/20" />
+                <span className="h-4 w-10 rounded-full bg-[#eadfc8]/20" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="mt-1 flex flex-col items-center gap-2 md:mt-2">

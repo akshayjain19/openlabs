@@ -62,7 +62,7 @@ export function ProjectMediaFrame({
       onError={() => setFailed(true)}
       className={cn(
         "h-auto w-full object-top",
-        variant === "mobile" ? "object-contain rounded-sm" : "object-cover",
+        variant === "mobile" ? "object-contain rounded-sm" : "object-contain",
         className,
       )}
       sizes={variant === "mobile" ? "(max-width: 768px) 45vw, 24vw" : "(max-width: 768px) 100vw, 55vw"}

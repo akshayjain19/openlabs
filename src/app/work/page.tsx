@@ -23,7 +23,7 @@ export default function WorkPage() {
         <p className="mt-4 max-w-lg text-sm text-zinc-500">Products, platforms and digital experiences.</p>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-8 space-y-4 md:space-y-5">
         {projects.map((project) => (
           <ProjectShowcase key={project.slug} project={project} />
         ))}
