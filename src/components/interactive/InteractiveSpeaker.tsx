@@ -86,14 +86,14 @@ function HardwareButton({ label, position, active, onPress, cursor, onHover }: B
           setHover(false);
           onHover(null);
         }}
-        position={[0, depressed ? -0.008 : 0, 0]}
+        position={[0, 0, depressed ? -0.012 : 0]}
       >
-        <boxGeometry args={[0.16, 0.048, 0.036]} />
+        <boxGeometry args={[0.15, 0.06, 0.04]} />
         <meshStandardMaterial color={active ? "#f7f2e8" : "#24201d"} metalness={0.22} roughness={0.48} />
       </mesh>
       <Text
-        position={[0, 0, 0.022]}
-        fontSize={0.028}
+        position={[0, 0, 0.031]}
+        fontSize={0.032}
         color={active ? "#0a0a0a" : "#f4efe6"}
         anchorX="center"
         anchorY="middle"
@@ -121,6 +121,7 @@ function SpeakerModel({
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const wooferRef = useRef<THREE.Mesh>(null);
+  const wooferRingRef = useRef<THREE.Mesh>(null);
   const grilleRef = useRef<THREE.Mesh>(null);
   const ledRef = useRef<THREE.Mesh>(null);
   const body = useRef({ rx: 0, ry: 0, vx: 0, vy: 0 });
@@ -128,8 +129,9 @@ function SpeakerModel({
   const motionScale = reducedMotion ? 0.15 : 1;
 
   useFrame(({ clock }) => {
-    const targetRy = pointer.current.x * 0.32 * motionScale;
-    const targetRx = -pointer.current.y * 0.1 * motionScale;
+    const t = clock.getElapsedTime();
+    const targetRy = -0.1 + pointer.current.x * 0.16 * motionScale;
+    const targetRx = 0.02 - pointer.current.y * 0.055 * motionScale;
     const k = reducedMotion ? 0.02 : 0.035;
     const d = reducedMotion ? 0.9 : 0.82;
 
@@ -141,72 +143,80 @@ function SpeakerModel({
     body.current.rx += body.current.vx;
 
     if (groupRef.current) {
+      const alive = playing ? Math.sin(t * 18) * 0.0025 * motionScale : Math.sin(t * 0.9) * 0.0015 * motionScale;
       groupRef.current.rotation.y = body.current.ry;
       groupRef.current.rotation.x = body.current.rx;
+      groupRef.current.position.y = alive;
     }
 
-    const t = clock.getElapsedTime();
     if (playing && wooferRef.current) {
       const pulse =
         (Math.sin(t * 9) * 0.012 + Math.sin(t * 2.7) * 0.008 + Math.sin(t * 15) * 0.004) *
         motionScale;
-      wooferRef.current.position.z = 0.14 + pulse;
+      wooferRef.current.position.z = 0.322 + pulse;
+      if (wooferRingRef.current) {
+        wooferRingRef.current.scale.setScalar(1 + pulse * 0.45);
+      }
       if (grilleRef.current) {
-        grilleRef.current.position.z = 0.195 + pulse * 0.15;
+        grilleRef.current.position.z = 0.286 + pulse * 0.12;
       }
     } else if (wooferRef.current) {
-      wooferRef.current.position.z = THREE.MathUtils.lerp(wooferRef.current.position.z, 0.14, 0.08);
+      wooferRef.current.position.z = THREE.MathUtils.lerp(wooferRef.current.position.z, 0.322, 0.08);
+      if (wooferRingRef.current) {
+        wooferRingRef.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.08);
+      }
     }
 
     if (ledRef.current) {
       const mat = ledRef.current.material as THREE.MeshStandardMaterial;
-      const glow = playing ? 0.35 + Math.sin(t * 2) * 0.12 : 0.04;
+      const glow = playing ? 0.75 + Math.sin(t * 2) * 0.18 : 0.05;
       mat.emissiveIntensity = glow * motionScale;
     }
   });
 
   return (
-    <group ref={groupRef} scale={1.16} rotation={[0.02, -0.08, 0]}>
-      <RoundedBox args={[1.35, 0.78, 0.52]} radius={0.06} smoothness={4} castShadow receiveShadow>
-        <meshStandardMaterial color="#d8d0c1" roughness={0.48} metalness={0.18} />
+    <group ref={groupRef} scale={1.28} rotation={[0.02, -0.1, 0]}>
+      <RoundedBox args={[1.16, 1.02, 0.46]} radius={0.09} smoothness={6} castShadow receiveShadow>
+        <meshStandardMaterial color="#d8d0c1" roughness={0.42} metalness={0.2} />
       </RoundedBox>
 
-      <mesh position={[0.68, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
-        <planeGeometry args={[0.52, 0.78]} />
-        <meshStandardMaterial color="#b9b0a1" roughness={0.58} metalness={0.18} />
+      <RoundedBox args={[0.86, 0.78, 0.045]} radius={0.035} smoothness={4} position={[0, -0.02, 0.255]}>
+        <meshStandardMaterial color="#111111" roughness={0.62} metalness={0.18} />
+      </RoundedBox>
+
+      <mesh ref={grilleRef} position={[0, -0.02, 0.286]}>
+        <planeGeometry args={[0.76, 0.68]} />
+        <meshStandardMaterial map={grilleTex ?? undefined} color="#161616" roughness={0.85} metalness={0.08} />
       </mesh>
 
-      <mesh ref={grilleRef} position={[0.265, 0, 0.2]}>
-        <planeGeometry args={[0.62, 0.52]} />
-        <meshStandardMaterial
-          map={grilleTex ?? undefined}
-          color="#151515"
-          roughness={0.82}
-          metalness={0.12}
-        />
+      <mesh ref={wooferRef} position={[0, -0.18, 0.322]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.23, 0.26, 0.05, 72]} />
+        <meshStandardMaterial color="#eee7da" roughness={0.34} metalness={0.22} />
       </mesh>
-
-      <mesh ref={wooferRef} position={[0.08, -0.06, 0.14]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[0.18, 0.2, 0.04, 48]} />
-        <meshStandardMaterial color="#f4efe6" roughness={0.38} metalness={0.18} />
+      <mesh ref={wooferRingRef} position={[0, -0.18, 0.354]}>
+        <torusGeometry args={[0.205, 0.018, 16, 72]} />
+        <meshStandardMaterial color="#101010" roughness={0.34} metalness={0.48} />
       </mesh>
-      <mesh position={[0.08, -0.06, 0.165]}>
-        <torusGeometry args={[0.12, 0.012, 12, 48]} />
+      <mesh position={[0, -0.18, 0.365]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.075, 0.085, 0.025, 48]} />
         <meshStandardMaterial color="#111111" roughness={0.35} metalness={0.45} />
       </mesh>
 
-      <mesh position={[0.08, 0.2, 0.14]}>
-        <cylinderGeometry args={[0.055, 0.06, 0.03, 32]} />
+      <mesh position={[0, 0.22, 0.322]} rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.082, 0.095, 0.032, 48]} />
         <meshStandardMaterial color="#f8f3ea" roughness={0.36} metalness={0.2} />
       </mesh>
-
-      <mesh position={[-0.55, 0.22, 0.18]}>
-        <boxGeometry args={[0.22, 0.08, 0.02]} />
-        <meshStandardMaterial color="#171412" roughness={0.72} metalness={0.12} />
+      <mesh position={[0, 0.22, 0.35]}>
+        <torusGeometry args={[0.082, 0.008, 12, 48]} />
+        <meshStandardMaterial color="#111111" roughness={0.36} metalness={0.5} />
       </mesh>
 
-      <mesh ref={ledRef} position={[-0.42, 0.22, 0.2]}>
-        <sphereGeometry args={[0.016, 16, 16]} />
+      <RoundedBox args={[0.48, 0.15, 0.04]} radius={0.018} smoothness={3} position={[0, 0.43, 0.31]}>
+        <meshStandardMaterial color="#171412" roughness={0.72} metalness={0.12} />
+      </RoundedBox>
+
+      <mesh ref={ledRef} position={[-0.18, 0.43, 0.345]}>
+        <sphereGeometry args={[0.018, 18, 18]} />
         <meshStandardMaterial
           color={playing ? "#c9ffb0" : "#39332c"}
           emissive={playing ? "#8dff65" : "#15110f"}
@@ -217,7 +227,7 @@ function SpeakerModel({
 
       <HardwareButton
         label="ON"
-        position={[-0.52, 0.22, 0.22]}
+        position={[0.02, 0.43, 0.34]}
         active={playing}
         onPress={onPressOn}
         cursor="on"
@@ -225,7 +235,7 @@ function SpeakerModel({
       />
       <HardwareButton
         label="OFF"
-        position={[-0.34, 0.22, 0.22]}
+        position={[0.2, 0.43, 0.34]}
         active={!playing}
         onPress={onPressOff}
         cursor="off"
@@ -296,7 +306,7 @@ function SpeakerCanvas({
 }) {
   return (
     <Canvas
-      camera={{ position: [0, 0.03, 1.9], fov: 34 }}
+      camera={{ position: [0, 0.02, 1.62], fov: 32 }}
       dpr={[1, dpr]}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
@@ -343,17 +353,58 @@ export function InteractiveSpeaker({ className = "", variant = "section" }: Prop
 
   return (
     <div
-      className={`relative w-full ${sizeClass} ${className}`}
+      className={`relative flex w-full flex-col items-center ${sizeClass} ${className}`}
       data-cursor={cursorHint}
     >
-      <SpeakerCanvas
-        playing={playing}
-        reducedMotion={reducedMotion}
-        onPressOn={handleOn}
-        onPressOff={handleOff}
-        dpr={dpr}
-        onHoverControl={onHoverControl}
-      />
+      <div className="w-full flex-1 min-h-0">
+        <SpeakerCanvas
+          playing={playing}
+          reducedMotion={reducedMotion}
+          onPressOn={handleOn}
+          onPressOff={handleOff}
+          dpr={dpr}
+          onHoverControl={onHoverControl}
+        />
+      </div>
+
+      <div className="mt-1 flex flex-col items-center gap-2 md:mt-2">
+        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 shadow-[0_18px_60px_rgba(0,0,0,0.35)]">
+          <span
+            aria-hidden
+            className={`h-2 w-2 rounded-full ${playing ? "bg-[#a7ff82] shadow-[0_0_16px_rgba(167,255,130,0.8)]" : "bg-zinc-700"}`}
+          />
+          <span className="min-w-14 text-center text-[9px] font-medium tracking-[0.28em] text-zinc-500">
+            {playing ? "PLAYING" : "OFF"}
+          </span>
+          <button
+            type="button"
+            aria-pressed={playing}
+            onClick={handleOn}
+            data-cursor="on"
+            className={`min-h-9 min-w-14 rounded-full border px-4 text-[10px] font-semibold tracking-[0.22em] transition ${
+              playing
+                ? "border-white bg-[#eee7da] text-black"
+                : "border-white/15 bg-[#171412] text-zinc-300 hover:border-white/35"
+            }`}
+          >
+            ON
+          </button>
+          <button
+            type="button"
+            aria-pressed={!playing}
+            onClick={handleOff}
+            data-cursor="off"
+            className={`min-h-9 min-w-14 rounded-full border px-4 text-[10px] font-semibold tracking-[0.22em] transition ${
+              !playing
+                ? "border-white bg-[#eee7da] text-black"
+                : "border-white/15 bg-[#171412] text-zinc-300 hover:border-white/35"
+            }`}
+          >
+            OFF
+          </button>
+        </div>
+        <p className="text-[9px] tracking-[0.28em] text-zinc-600">TURN ON FOR RAIN.</p>
+      </div>
 
       <div className="pointer-events-none absolute bottom-4 left-4 flex flex-col gap-2 md:bottom-6 md:left-6">
         {blocked ? (
@@ -361,14 +412,6 @@ export function InteractiveSpeaker({ className = "", variant = "section" }: Prop
         ) : null}
       </div>
 
-      <div className="sr-only">
-        <button type="button" onClick={handleOn}>
-          Turn ambient rain on
-        </button>
-        <button type="button" onClick={handleOff}>
-          Turn ambient rain off
-        </button>
-      </div>
     </div>
   );
 }
