@@ -27,7 +27,6 @@ export function FinalCta() {
             EMAIL US →
           </Link>
         </div>
-        <p className="mt-6 text-xs text-zinc-500">{site.email.address}</p>
       </div>
     </section>
   );

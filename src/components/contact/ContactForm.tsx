@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/content/site";
 import { whatsAppLink } from "@/lib/utils";
 
 export function ContactForm() {
@@ -35,7 +34,7 @@ export function ContactForm() {
   if (sent) {
     return (
       <p className="border border-white/10 p-6 text-sm text-zinc-400">
-        WhatsApp should be open with your message. You can also email {site.email.address}.
+        WhatsApp should be open with your message. You can also use the email link on this page.
       </p>
     );
   }
