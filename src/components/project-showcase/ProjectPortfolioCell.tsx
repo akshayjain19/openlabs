@@ -3,8 +3,7 @@
 import Link from "next/link";
 import type { Project } from "@/content/projects";
 import { MobileDeviceFrame } from "@/components/work/MobileDeviceFrame";
-import { ProjectMediaFrame, ProjectMediaPlaceholder } from "@/components/work/ProjectMediaFrame";
-import { cn } from "@/lib/utils";
+import { ProjectMediaFrame } from "@/components/work/ProjectMediaFrame";
 
 type Props = {
   project: Project;
@@ -25,7 +24,7 @@ function AppMedia({ project, priority }: Props) {
   const slots = images.length ? images.slice(0, 3) : [undefined, undefined];
 
   return (
-    <div className="flex min-w-0 items-end justify-center gap-3 overflow-hidden md:justify-end md:gap-5">
+    <div className="flex min-w-0 items-center justify-center gap-3 overflow-hidden md:justify-end md:gap-5">
       {slots.map((src, index) => (
         <MobileDeviceFrame
           key={`${project.slug}-app-${index}`}
@@ -33,12 +32,7 @@ function AppMedia({ project, priority }: Props) {
           alt={`${project.imageAlt} — app screen ${index + 1}`}
           fallbackLabel={`${project.name} app screen ${index + 1}`}
           priority={priority && index === 0}
-          className={cn(
-            index === 0
-              ? "w-[47%] max-w-[205px] md:w-[250px] md:max-w-[250px]"
-              : "w-[39%] max-w-[170px] opacity-95 md:w-[212px] md:max-w-[212px]",
-            index > 1 ? "hidden lg:block" : "",
-          )}
+          className={index > 1 ? "hidden h-[330px] w-auto sm:h-[380px] md:h-[430px] lg:block lg:h-[450px]" : "h-[330px] w-auto sm:h-[380px] md:h-[430px] lg:h-[450px]"}
         />
       ))}
     </div>
@@ -46,50 +40,38 @@ function AppMedia({ project, priority }: Props) {
 }
 
 function WebMedia({ project, priority }: Props) {
+  const hasMobile = Boolean(project.mobileWebImage);
+
   return (
-    <div className="grid min-w-0 items-end gap-4 md:grid-cols-[minmax(0,1fr)_clamp(180px,18vw,240px)] md:gap-5">
+    <div
+      className={
+        hasMobile
+          ? "grid min-w-0 items-center gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:gap-5"
+          : "grid min-w-0 items-center"
+      }
+    >
       <ProjectMediaFrame
         src={project.desktopImage ?? project.image}
         alt={`${project.imageAlt} — web`}
         fallbackLabel={`${project.name} web image`}
         variant="desktop"
         priority={priority}
-        className="max-h-[460px] rounded-[4px] object-contain"
+        className="h-[330px] rounded-[4px] object-contain sm:h-[380px] md:h-[430px] lg:h-[450px]"
       />
-      <MobileDeviceFrame
-        src={project.mobileWebImage}
-        alt={`${project.imageAlt} — mobile web`}
-        fallbackLabel={`${project.name} mobile web image`}
-        className="w-[54%] max-w-[218px] justify-self-center md:w-full md:max-w-[240px] md:justify-self-end"
-      />
+      {hasMobile ? (
+        <MobileDeviceFrame
+          src={project.mobileWebImage}
+          alt={`${project.imageAlt} — mobile web`}
+          fallbackLabel={`${project.name} mobile web image`}
+          className="h-[280px] w-auto justify-self-center sm:h-[323px] md:h-[366px] lg:h-[383px] md:justify-self-end"
+        />
+      ) : null}
     </div>
   );
 }
 
 function HybridMedia({ project, priority }: Props) {
-  return (
-    <div className="grid min-w-0 items-end gap-4 lg:grid-cols-[minmax(0,1fr)_clamp(160px,15vw,210px)_clamp(150px,14vw,200px)] lg:gap-5">
-      <ProjectMediaFrame
-        src={project.desktopImage ?? project.image}
-        alt={`${project.imageAlt} — web`}
-        fallbackLabel={`${project.name} web image`}
-        variant="desktop"
-        priority={priority}
-        className="max-h-[430px] rounded-[4px] object-contain"
-      />
-      <MobileDeviceFrame
-        src={project.mobileWebImage}
-        alt={`${project.imageAlt} — mobile web`}
-        fallbackLabel={`${project.name} mobile web image`}
-        className="w-[54%] max-w-[210px] justify-self-center lg:w-full lg:max-w-[210px]"
-      />
-      <ProjectMediaPlaceholder
-        label={project.crmImage ? `${project.name} CRM` : "CRM screenshot coming soon"}
-        variant="desktop"
-        className="hidden aspect-[4/5] rounded-[4px] lg:flex"
-      />
-    </div>
-  );
+  return <WebMedia project={project} priority={priority} />;
 }
 
 function ProjectMedia({ project, priority }: Props) {

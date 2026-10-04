@@ -61,7 +61,7 @@ export function ProjectMediaFrame({
       priority={priority}
       onError={() => setFailed(true)}
       className={cn(
-        "h-auto w-full object-top",
+        "w-full object-top",
         variant === "mobile" ? "object-contain rounded-sm" : "object-contain",
         className,
       )}
