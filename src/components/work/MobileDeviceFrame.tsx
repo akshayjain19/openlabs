@@ -21,18 +21,18 @@ export function MobileDeviceFrame({ src, alt, fallbackLabel, className, variant 
   return (
     <div
       className={cn(
-        "relative aspect-[9/19.6] w-full border border-white/20 bg-[#070707]",
+        "relative aspect-[9/19.6] shrink-0 border border-white/20 bg-[#070707]",
         isWeb
-          ? "rounded-[1.3rem] p-[0.8%] shadow-[0_10px_24px_rgba(0,0,0,0.24)]"
-          : "rounded-[1.7rem] p-[1.8%] shadow-[0_18px_45px_rgba(0,0,0,0.34)]",
-        "before:absolute before:top-[1.25%] before:left-1/2 before:z-10 before:h-[1.15%] before:w-[20%] before:-translate-x-1/2 before:rounded-full before:bg-white/20",
+          ? "w-[clamp(175px,15vw,220px)] max-w-[46vw] rounded-[1.25rem] p-[5px] shadow-[0_8px_20px_rgba(0,0,0,0.24)]"
+          : "w-full rounded-[1.7rem] p-[1.8%] shadow-[0_18px_45px_rgba(0,0,0,0.34)]",
+        "before:absolute before:top-[1.25%] before:left-1/2 before:z-10 before:h-[1.15%] before:w-[18%] before:-translate-x-1/2 before:rounded-full before:bg-black/80",
         "after:absolute after:top-[16%] after:right-[-2px] after:h-[12%] after:w-[2px] after:rounded-r-full after:bg-white/18",
         className,
       )}
     >
       <span className="absolute top-[14%] left-[-2px] h-[7%] w-[2px] rounded-l-full bg-white/14" aria-hidden="true" />
       <span className="absolute top-[24%] left-[-2px] h-[7%] w-[2px] rounded-l-full bg-white/12" aria-hidden="true" />
-      <div className={cn("relative h-full overflow-hidden bg-[#050505] ring-1 ring-white/12", isWeb ? "rounded-[1.12rem]" : "rounded-[1.48rem]")}>
+      <div className={cn("relative h-full overflow-hidden bg-[#050505] ring-1 ring-white/12", isWeb ? "rounded-[1rem]" : "rounded-[1.48rem]")}>
         {hasImage ? (
           <Image
             src={src}
@@ -41,7 +41,7 @@ export function MobileDeviceFrame({ src, alt, fallbackLabel, className, variant 
             height={844}
             priority={priority}
             onError={() => setFailed(true)}
-            className="h-full w-full object-contain object-top"
+            className={cn("h-full w-full object-top", isWeb ? "object-cover" : "object-contain")}
             sizes="(max-width: 768px) 48vw, 240px"
           />
         ) : (
