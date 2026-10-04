@@ -64,7 +64,7 @@ function WebMedia({ project, priority }: Props) {
           alt={`${project.imageAlt} — mobile web`}
           fallbackLabel={`${project.name} mobile web image`}
           variant="web"
-          className="h-[280px] w-auto justify-self-center sm:h-[323px] md:h-[366px] lg:h-[383px] md:justify-self-end"
+          className="justify-self-center md:justify-self-end"
         />
       ) : null}
     </div>
