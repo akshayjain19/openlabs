@@ -28,7 +28,6 @@ export function SiteFooter() {
           <a href={site.email.href} className="block text-xs tracking-[0.2em] text-zinc-400 hover:text-white">
             EMAIL US →
           </a>
-          <p className="pt-2 text-xs text-zinc-600">{site.email.address}</p>
         </div>
       </div>
       <div className="border-t border-white/10 px-5 py-5 md:px-8">

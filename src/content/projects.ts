@@ -18,6 +18,7 @@ export type Project = {
   image?: string;
   desktopImage?: string;
   mobileWebImage?: string;
+  appImages?: string[];
   gallery?: string[];
   imageAlt: string;
   note?: string;
@@ -101,6 +102,11 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
     desktopImage: projectDesktopPath("sg11-fantasy"),
+    appImages: [
+      "/projects/sg11-fantasy/app-1.webp",
+      "/projects/sg11-fantasy/app-2.webp",
+      "/projects/sg11-fantasy/app-3.webp",
+    ],
     image: projectDesktopPath("sg11-fantasy"),
     gallery: projectGallery("sg11-fantasy"),
     imageAlt: "SG11 Fantasy sports product",

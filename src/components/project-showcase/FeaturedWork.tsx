@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { Project } from "@/content/projects";
+import { MobileDeviceFrame } from "@/components/work/MobileDeviceFrame";
 import { ProjectMediaFrame } from "@/components/work/ProjectMediaFrame";
 
 function resolveDesktop(project: Project) {
@@ -25,6 +26,7 @@ function ProjectTitle({ project }: { project: Project }) {
 function FeaturedProject({ project }: { project: Project }) {
   const desktop = resolveDesktop(project);
   const mobileWeb = project.mobileWebImage;
+  const appImages = project.appImages ?? [];
 
   return (
     <article className="border border-white/10 px-4 py-5 md:max-h-[75svh] md:px-6 md:py-6 lg:px-8">
@@ -35,27 +37,42 @@ function FeaturedProject({ project }: { project: Project }) {
           </h3>
         </div>
 
-        <div
-          className="grid min-w-0 items-end gap-3 md:grid-cols-[minmax(0,0.76fr)_minmax(104px,0.22fr)] md:gap-4 lg:gap-5"
-          data-cursor="project"
-        >
-          <ProjectMediaFrame
-            src={desktop}
-            alt={`${project.imageAlt} — web`}
-            fallbackLabel={`${project.name} web image`}
-            variant="desktop"
-            className="max-h-[min(46svh,500px)] rounded-sm"
-          />
-          <div className="w-[44%] min-w-[150px] max-w-[230px] justify-self-end md:w-full md:min-w-[180px] md:max-w-[260px]">
+        {appImages.length ? (
+          <div
+            className="flex min-w-0 items-end justify-center gap-2 overflow-hidden sm:gap-4 md:justify-end lg:gap-6"
+            data-cursor="project"
+          >
+            {appImages.slice(0, 3).map((src, index) => (
+              <MobileDeviceFrame
+                key={src}
+                src={src}
+                alt={`${project.imageAlt} — app screen ${index + 1}`}
+                fallbackLabel={`${project.name} app screen ${index + 1}`}
+                className={
+                  index === 0
+                    ? "w-[34%] max-w-[165px] sm:max-w-[230px] md:w-[38%] md:max-w-[270px]"
+                    : "w-[27%] max-w-[132px] opacity-90 sm:max-w-[178px] md:w-[29%] md:max-w-[210px]"
+                }
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="relative min-w-0 pb-2 md:pr-[clamp(170px,22vw,285px)]" data-cursor="project">
             <ProjectMediaFrame
+              src={desktop}
+              alt={`${project.imageAlt} — web`}
+              fallbackLabel={`${project.name} web image`}
+              variant="desktop"
+              className="max-h-[min(46svh,500px)] rounded-sm"
+            />
+            <MobileDeviceFrame
               src={mobileWeb}
               alt={`${project.imageAlt} — mobile web`}
               fallbackLabel={`${project.name} mobile web image`}
-              variant="mobile"
-              className="max-h-[min(48svh,520px)]"
+              className="mt-3 w-[45%] min-w-[145px] max-w-[220px] justify-self-end md:absolute md:right-0 md:bottom-0 md:mt-0 md:w-[24vw] md:max-w-[265px]"
             />
           </div>
-        </div>
+        )}
       </div>
     </article>
   );
