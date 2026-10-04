@@ -19,12 +19,15 @@ export function MobileDeviceFrame({ src, alt, fallbackLabel, className, priority
   return (
     <div
       className={cn(
-        "relative aspect-[9/19.25] w-full rounded-[2rem] border border-white/15 bg-[#080808] p-[3.5%] shadow-[0_28px_80px_rgba(0,0,0,0.5)]",
-        "before:absolute before:top-[1.7%] before:left-1/2 before:z-10 before:h-[1.5%] before:w-[22%] before:-translate-x-1/2 before:rounded-full before:bg-white/16",
+        "relative aspect-[9/19.6] w-full rounded-[1.7rem] border border-white/20 bg-[#070707] p-[1.8%] shadow-[0_18px_45px_rgba(0,0,0,0.34)]",
+        "before:absolute before:top-[1.25%] before:left-1/2 before:z-10 before:h-[1.15%] before:w-[20%] before:-translate-x-1/2 before:rounded-full before:bg-white/20",
+        "after:absolute after:top-[16%] after:right-[-2px] after:h-[12%] after:w-[2px] after:rounded-r-full after:bg-white/18",
         className,
       )}
     >
-      <div className="relative h-full overflow-hidden rounded-[1.45rem] bg-[#050505] ring-1 ring-white/10">
+      <span className="absolute top-[14%] left-[-2px] h-[7%] w-[2px] rounded-l-full bg-white/14" aria-hidden="true" />
+      <span className="absolute top-[24%] left-[-2px] h-[7%] w-[2px] rounded-l-full bg-white/12" aria-hidden="true" />
+      <div className="relative h-full overflow-hidden rounded-[1.48rem] bg-[#050505] ring-1 ring-white/12">
         {hasImage ? (
           <Image
             src={src}
@@ -34,7 +37,7 @@ export function MobileDeviceFrame({ src, alt, fallbackLabel, className, priority
             priority={priority}
             onError={() => setFailed(true)}
             className="h-full w-full object-contain object-top"
-            sizes="(max-width: 768px) 45vw, 20vw"
+            sizes="(max-width: 768px) 48vw, 240px"
           />
         ) : (
           <div
