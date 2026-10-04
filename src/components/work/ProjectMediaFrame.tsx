@@ -21,7 +21,7 @@ export function ProjectMediaPlaceholder({ label, variant = "desktop", className 
       role="img"
       aria-label={`${label} — media placeholder`}
     >
-      <p className="text-[9px] tracking-[0.35em] text-zinc-600 uppercase">Media slot</p>
+      <p className="text-[9px] tracking-[0.35em] text-zinc-600 uppercase">Project image coming soon</p>
       <p className="mt-2 max-w-[80%] text-[10px] leading-snug text-zinc-500">{label}</p>
     </div>
   );
