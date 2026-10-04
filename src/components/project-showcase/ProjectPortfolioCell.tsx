@@ -64,6 +64,7 @@ function WebMedia({ project, priority }: Props) {
           alt={`${project.imageAlt} — mobile web`}
           fallbackLabel={`${project.name} mobile web image`}
           className="h-[280px] w-auto justify-self-center sm:h-[323px] md:h-[366px] lg:h-[383px] md:justify-self-end"
+          imageClassName={project.slug === "tattvasri" ? "object-cover object-top" : undefined}
         />
       ) : null}
     </div>

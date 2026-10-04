@@ -9,10 +9,11 @@ type Props = {
   alt: string;
   fallbackLabel: string;
   className?: string;
+  imageClassName?: string;
   priority?: boolean;
 };
 
-export function MobileDeviceFrame({ src, alt, fallbackLabel, className, priority }: Props) {
+export function MobileDeviceFrame({ src, alt, fallbackLabel, className, imageClassName, priority }: Props) {
   const [failed, setFailed] = useState(false);
   const hasImage = src && !failed;
 
@@ -36,7 +37,7 @@ export function MobileDeviceFrame({ src, alt, fallbackLabel, className, priority
             height={844}
             priority={priority}
             onError={() => setFailed(true)}
-            className="h-full w-full object-contain object-top"
+            className={cn("h-full w-full object-contain object-top", imageClassName)}
             sizes="(max-width: 768px) 48vw, 240px"
           />
         ) : (
