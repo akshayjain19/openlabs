@@ -64,7 +64,6 @@ function WebMedia({ project, priority }: Props) {
           alt={`${project.imageAlt} — mobile web`}
           fallbackLabel={`${project.name} mobile web image`}
           className="h-[280px] w-auto justify-self-center sm:h-[323px] md:h-[366px] lg:h-[383px] md:justify-self-end"
-          imageClassName={project.slug === "tattvasri" ? "object-cover object-top" : undefined}
         />
       ) : null}
     </div>
@@ -82,7 +81,7 @@ function ProjectMedia({ project, priority }: Props) {
 }
 
 export function ProjectPortfolioCell({ project, priority }: Props) {
-  const verifiedProof = project.proof?.[0];
+  const projectProof = project.proofLine;
 
   return (
     <article className="border border-white/10 px-4 py-5 md:px-6 md:py-6 lg:px-8">
@@ -91,9 +90,9 @@ export function ProjectPortfolioCell({ project, priority }: Props) {
           <h3 className="max-w-[10ch] text-[clamp(2rem,4vw,3rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
             <ProjectTitle project={project} />
           </h3>
-          {verifiedProof ? (
-            <p className="mt-5 text-[11px] font-semibold tracking-[0.24em] text-zinc-500 uppercase">
-              {verifiedProof}
+          {projectProof ? (
+            <p className="mt-3 max-w-[24ch] text-sm leading-snug text-zinc-500">
+              {projectProof}
             </p>
           ) : null}
         </div>
