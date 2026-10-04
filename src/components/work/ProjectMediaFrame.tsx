@@ -15,14 +15,14 @@ export function ProjectMediaPlaceholder({ label, variant = "desktop", className 
     <div
       className={cn(
         "flex flex-col items-center justify-center border border-dashed border-white/15 bg-[#0a0a0a] text-center",
-        variant === "mobile" ? "aspect-[9/19] w-full max-w-[140px]" : "aspect-[16/10] w-full",
+        variant === "mobile" ? "aspect-[9/19] w-full" : "aspect-[16/10] w-full",
         className,
       )}
       role="img"
       aria-label={`${label} — media placeholder`}
     >
       <p className="text-[9px] tracking-[0.35em] text-zinc-600 uppercase">
-        {variant === "mobile" ? "Mobile image pending" : "Web image pending"}
+        {variant === "mobile" ? "Mobile web image pending" : "Desktop web image pending"}
       </p>
       <p className="mt-2 max-w-[80%] text-[10px] leading-snug text-zinc-500">{label}</p>
     </div>
@@ -61,11 +61,11 @@ export function ProjectMediaFrame({
       priority={priority}
       onError={() => setFailed(true)}
       className={cn(
-        "h-auto w-full object-cover object-top",
-        variant === "mobile" && "rounded-[12px] shadow-[0_20px_50px_rgba(0,0,0,0.45)]",
+        "h-auto w-full object-top",
+        variant === "mobile" ? "object-contain rounded-sm" : "object-cover",
         className,
       )}
-      sizes={variant === "mobile" ? "22vw" : "(max-width: 768px) 100vw, 75vw"}
+      sizes={variant === "mobile" ? "(max-width: 768px) 45vw, 24vw" : "(max-width: 768px) 100vw, 55vw"}
     />
   );
 }

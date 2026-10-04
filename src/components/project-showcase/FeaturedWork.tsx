@@ -2,17 +2,10 @@
 
 import Link from "next/link";
 import type { Project } from "@/content/projects";
-import { LEGACY_MOBILE } from "@/lib/project-media";
 import { ProjectMediaFrame } from "@/components/work/ProjectMediaFrame";
 
 function resolveDesktop(project: Project) {
   return project.desktopImage ?? project.image;
-}
-
-function resolveMobile(project: Project) {
-  if (project.mobileImage) return project.mobileImage;
-  const legacy = project.gallery?.find((g) => g.includes(LEGACY_MOBILE)) ?? project.gallery?.[0];
-  return legacy;
 }
 
 function ProjectTitle({ project }: { project: Project }) {
@@ -31,7 +24,7 @@ function ProjectTitle({ project }: { project: Project }) {
 
 function FeaturedProject({ project }: { project: Project }) {
   const desktop = resolveDesktop(project);
-  const mobile = resolveMobile(project);
+  const mobileWeb = project.mobileWebImage;
 
   return (
     <article className="border border-white/10 px-4 py-5 md:max-h-[75svh] md:px-6 md:py-6 lg:px-8">
@@ -53,13 +46,13 @@ function FeaturedProject({ project }: { project: Project }) {
             variant="desktop"
             className="max-h-[min(46svh,500px)] rounded-sm"
           />
-          <div className="w-[42%] min-w-[108px] max-w-[170px] justify-self-end md:w-full md:max-w-[190px]">
+          <div className="w-[44%] min-w-[150px] max-w-[230px] justify-self-end md:w-full md:min-w-[180px] md:max-w-[260px]">
             <ProjectMediaFrame
-              src={mobile}
-              alt={`${project.imageAlt} — mobile`}
-              fallbackLabel={`${project.name} mobile image`}
+              src={mobileWeb}
+              alt={`${project.imageAlt} — mobile web`}
+              fallbackLabel={`${project.name} mobile web image`}
               variant="mobile"
-              className="max-h-[min(43svh,430px)]"
+              className="max-h-[min(48svh,520px)]"
             />
           </div>
         </div>

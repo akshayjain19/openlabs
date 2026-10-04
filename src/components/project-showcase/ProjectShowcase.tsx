@@ -26,7 +26,7 @@ function Title({ project }: { project: Project }) {
 
 function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) {
   const src = project.desktopImage ?? project.image;
-  const mobile = project.mobileImage ?? project.gallery?.[0];
+  const mobileWeb = project.mobileWebImage;
   const maxClass = tall ? "max-h-[min(43svh,460px)]" : "max-h-[min(40svh,430px)]";
 
   return (
@@ -40,9 +40,9 @@ function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) 
       />
       <div className="absolute right-2 bottom-2 w-[22%] min-w-[82px] max-w-[132px] md:right-5 md:bottom-5 md:w-[18%] md:max-w-[150px]">
         <ProjectMediaFrame
-          src={mobile}
-          alt={`${project.imageAlt} — mobile`}
-          fallbackLabel={`${project.name} mobile`}
+          src={mobileWeb}
+          alt={`${project.imageAlt} — mobile web`}
+          fallbackLabel={`${project.name} mobile web`}
           variant="mobile"
           className="max-h-[min(30svh,300px)]"
         />

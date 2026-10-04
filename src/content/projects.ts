@@ -1,4 +1,4 @@
-import { projectDesktopPath, projectGallery, projectMobilePath } from "@/lib/project-media";
+import { projectDesktopPath, projectGallery, projectMobileWebPath } from "@/lib/project-media";
 
 /** Internal: Afrikmart — DO NOT PUBLISH until verified and approved. */
 
@@ -17,7 +17,7 @@ export type Project = {
   /** @deprecated use desktopImage */
   image?: string;
   desktopImage?: string;
-  mobileImage?: string;
+  mobileWebImage?: string;
   gallery?: string[];
   imageAlt: string;
   note?: string;
@@ -45,7 +45,6 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Search + discovery for a travel marketplace.",
     href: "https://viacation.com/",
     desktopImage: projectDesktopPath("viacation"),
-    mobileImage: projectMobilePath("viacation"),
     image: projectDesktopPath("viacation"),
     gallery: projectGallery("viacation"),
     imageAlt: "Viacation travel platform",
@@ -64,7 +63,7 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Selected marketplace feature development.",
     href: "https://www.ourshopee.com/",
     desktopImage: projectDesktopPath("our-shopee"),
-    mobileImage: projectMobilePath("our-shopee"),
+    mobileWebImage: projectMobileWebPath("our-shopee"),
     image: projectDesktopPath("our-shopee"),
     gallery: projectGallery("our-shopee"),
     imageAlt: "OurShopee marketplace — selected feature work",
@@ -83,7 +82,7 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Built for organic discovery and local commerce.",
     href: "https://indorenursery.com/",
     desktopImage: projectDesktopPath("indore-nursery"),
-    mobileImage: projectMobilePath("indore-nursery"),
+    mobileWebImage: projectMobileWebPath("indore-nursery"),
     image: projectDesktopPath("indore-nursery"),
     gallery: projectGallery("indore-nursery"),
     imageAlt: "Indore Nursery commerce platform",
@@ -102,7 +101,6 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Consumer-facing fantasy sports product experience.",
     href: "https://sg11fantasyindia.com/",
     desktopImage: projectDesktopPath("sg11-fantasy"),
-    mobileImage: projectMobilePath("sg11-fantasy"),
     image: projectDesktopPath("sg11-fantasy"),
     gallery: projectGallery("sg11-fantasy"),
     imageAlt: "SG11 Fantasy sports product",
@@ -123,7 +121,7 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "Service discovery, booking and local lead generation.",
     href: "https://thelaundryhouseindia.com/",
     desktopImage: projectDesktopPath("the-laundry-house"),
-    mobileImage: projectMobilePath("the-laundry-house"),
+    mobileWebImage: projectMobileWebPath("the-laundry-house"),
     image: projectDesktopPath("the-laundry-house"),
     gallery: projectGallery("the-laundry-house"),
     imageAlt: "The Laundry House digital experience for garment care",
@@ -156,7 +154,7 @@ export const korvaLabsProjects: Project[] = [
     proofLine: "WhatsApp-led commerce and product discovery.",
     href: "https://tattvasri.com/",
     desktopImage: projectDesktopPath("tattvasri"),
-    mobileImage: projectMobilePath("tattvasri"),
+    mobileWebImage: projectMobileWebPath("tattvasri"),
     image: projectDesktopPath("tattvasri"),
     gallery: projectGallery("tattvasri"),
     imageAlt: "Tattvasri lifestyle commerce experience",
