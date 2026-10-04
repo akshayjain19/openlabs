@@ -19,7 +19,7 @@ const InteractiveSpeaker = dynamic(
 export function HeroSection() {
   return (
     <section className="relative border-b border-white/10 bg-[#050505] pt-24 pb-8 md:pt-28 md:pb-12 lg:min-h-[90svh] lg:pb-14 lg:pt-32">
-      <div className="mx-auto grid w-full max-w-[1400px] gap-8 px-5 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-6">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-8 px-5 md:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-8">
         <div className="flex flex-col justify-end pb-2 lg:pb-8">
           <HeroHeadline />
           <p className="mt-6 max-w-md text-xs leading-relaxed tracking-[0.18em] text-zinc-500 uppercase md:mt-8">
@@ -42,7 +42,7 @@ export function HeroSection() {
             </Link>
           </div>
         </div>
-        <div className="relative lg:-mt-2 lg:justify-self-end lg:w-full lg:max-w-[560px]">
+        <div className="relative lg:justify-self-end lg:w-full lg:max-w-[640px]">
           <InteractiveSpeaker variant="hero" />
         </div>
       </div>
