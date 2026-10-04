@@ -34,32 +34,34 @@ function FeaturedProject({ project }: { project: Project }) {
   const mobile = resolveMobile(project);
 
   return (
-    <article className="py-1 md:max-h-[72svh] md:py-2">
-      <h3 className="text-lg font-semibold tracking-tight md:text-xl">
-        <ProjectTitle project={project} />
-      </h3>
+    <article className="border border-white/10 px-4 py-5 md:max-h-[75svh] md:px-6 md:py-6 lg:px-8">
+      <div className="grid gap-5 md:grid-cols-[minmax(180px,0.28fr)_minmax(0,0.72fr)] md:items-center lg:gap-8">
+        <div className="md:self-stretch md:py-2">
+          <h3 className="max-w-[12ch] text-[clamp(2rem,3vw,3.25rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+            <ProjectTitle project={project} />
+          </h3>
+        </div>
 
-      <div
-        className="mt-3 grid items-end gap-3 overflow-visible md:mt-4 md:grid-cols-[minmax(0,0.76fr)_minmax(110px,0.22fr)] md:gap-4"
-        data-cursor="project"
-      >
-        <div className="min-w-0">
+        <div
+          className="grid min-w-0 items-end gap-3 md:grid-cols-[minmax(0,0.76fr)_minmax(104px,0.22fr)] md:gap-4 lg:gap-5"
+          data-cursor="project"
+        >
           <ProjectMediaFrame
             src={desktop}
             alt={`${project.imageAlt} — web`}
             fallbackLabel={`${project.name} web image`}
             variant="desktop"
-            className="max-h-[min(40svh,430px)] rounded-sm"
+            className="max-h-[min(46svh,500px)] rounded-sm"
           />
-        </div>
-        <div className="w-[34%] min-w-[96px] max-w-[150px] justify-self-end md:w-full md:max-w-[170px] md:-ml-8">
-          <ProjectMediaFrame
-            src={mobile}
-            alt={`${project.imageAlt} — mobile`}
-            fallbackLabel={`${project.name} mobile image`}
-            variant="mobile"
-            className="max-h-[min(32svh,320px)]"
-          />
+          <div className="w-[42%] min-w-[108px] max-w-[170px] justify-self-end md:w-full md:max-w-[190px]">
+            <ProjectMediaFrame
+              src={mobile}
+              alt={`${project.imageAlt} — mobile`}
+              fallbackLabel={`${project.name} mobile image`}
+              variant="mobile"
+              className="max-h-[min(43svh,430px)]"
+            />
+          </div>
         </div>
       </div>
     </article>
@@ -73,7 +75,7 @@ export function FeaturedWork({ projects }: { projects: Project[] }) {
         <h2 className="text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-[-0.04em]">
           THINGS WE&apos;VE BUILT.
         </h2>
-        <div className="mt-6 space-y-7 md:space-y-8">
+        <div className="mt-6 space-y-6 md:space-y-8">
           {projects.map((project) => (
             <FeaturedProject key={project.slug} project={project} />
           ))}
