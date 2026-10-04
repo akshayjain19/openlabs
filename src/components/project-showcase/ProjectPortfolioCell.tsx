@@ -24,7 +24,7 @@ function AppMedia({ project, priority }: Props) {
   const slots = images.length ? images.slice(0, 3) : [undefined, undefined];
 
   return (
-    <div className="flex min-w-0 items-center justify-center gap-3 overflow-hidden md:justify-end md:gap-5">
+    <div className="[--app-phone-width:clamp(135px,11vw,146px)] flex min-w-0 items-center justify-center gap-4 overflow-hidden md:justify-end md:gap-5">
       {slots.map((src, index) => (
         <MobileDeviceFrame
           key={`${project.slug}-app-${index}`}
@@ -32,7 +32,7 @@ function AppMedia({ project, priority }: Props) {
           alt={`${project.imageAlt} — app screen ${index + 1}`}
           fallbackLabel={`${project.name} app screen ${index + 1}`}
           priority={priority && index === 0}
-          className={index > 1 ? "hidden h-[330px] w-auto sm:h-[380px] md:h-[430px] lg:block lg:h-[450px]" : "h-[330px] w-auto sm:h-[380px] md:h-[430px] lg:h-[450px]"}
+          className="w-[var(--app-phone-width)]"
         />
       ))}
     </div>
@@ -83,10 +83,11 @@ function ProjectMedia({ project, priority }: Props) {
 
 export function ProjectPortfolioCell({ project, priority }: Props) {
   const projectProof = project.proofLine;
+  const isApp = project.type === "app";
 
   return (
     <article className="border border-white/10 px-4 py-5 md:px-6 md:py-6 lg:px-8">
-      <div className="grid gap-5 md:min-h-[480px] md:grid-cols-[minmax(170px,0.24fr)_minmax(0,0.76fr)] md:items-center lg:gap-8">
+      <div className={isApp ? "grid gap-5 md:grid-cols-[minmax(170px,0.24fr)_minmax(0,0.76fr)] md:items-center lg:gap-8" : "grid gap-5 md:min-h-[480px] md:grid-cols-[minmax(170px,0.24fr)_minmax(0,0.76fr)] md:items-center lg:gap-8"}>
         <div className="md:self-center">
           <h3 className="max-w-[10ch] text-[clamp(2rem,4vw,3rem)] font-semibold leading-[0.95] tracking-[-0.035em]">
             <ProjectTitle project={project} />
