@@ -44,7 +44,7 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 100,
     description: "Travel discovery and marketplace experience.",
     outcome: "Search, packages, and lead-generation flows.",
-    proofLine: "Search + discovery for a travel marketplace.",
+    proofLine: "Built custom and AI workflows",
     href: "https://viacation.com/",
     appImages: [
       "/projects/viacation/app-1.webp",
@@ -85,7 +85,7 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 95,
     description: "Commerce for a plant nursery with catalogue and local fulfilment.",
     outcome: "Built for organic discovery and local commerce.",
-    proofLine: "Built for organic discovery and local commerce.",
+    proofLine: "#1 in SEO ranking across the category",
     href: "https://indorenursery.com/",
     desktopImage: projectDesktopPath("indore-nursery"),
     mobileWebImage: projectMobileWebPath("indore-nursery"),
@@ -103,7 +103,7 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 90,
     description: "Consumer fantasy sports product experience.",
     outcome: "High-engagement consumer product flows.",
-    proofLine: "Consumer-facing fantasy sports product experience.",
+    proofLine: "1M+ active users",
     href: "https://sg11fantasyindia.com/",
     appImages: [
       "/projects/sg11-fantasy/app-1.webp",
@@ -125,7 +125,7 @@ export const korvaLabsProjects: Project[] = [
     description:
       "A premium digital experience for a garment-care business, bringing service discovery, booking, doorstep pickup and delivery, store discovery, and franchise enquiries into one platform.",
     outcome: "Garment-care across 9 major cities — discovery, booking, and enquiries.",
-    proofLine: "Service discovery, booking and local lead generation.",
+    proofLine: "Luxury laundry experience",
     href: "https://thelaundryhouseindia.com/",
     desktopImage: projectDesktopPath("the-laundry-house"),
     mobileWebImage: projectMobileWebPath("the-laundry-house"),
@@ -142,6 +142,7 @@ export const korvaLabsProjects: Project[] = [
     featured: true,
     leadPriority: 80,
     description: "Premium coffee ecommerce experience.",
+    proofLine: "Built internal CRM system only",
     href: "https://usmaracoffee.com/",
     desktopImage: projectDesktopPath("usmara-coffee"),
     mobileWebImage: projectMobileWebPath("usmara-coffee"),
@@ -174,7 +175,7 @@ export const korvaLabsProjects: Project[] = [
     leadPriority: 50,
     description:
       "Digital commerce for a spiritual lifestyle brand with WhatsApp-led purchase flows.",
-    proofLine: "WhatsApp-led commerce and product discovery.",
+    proofLine: "Small business selling crystals",
     href: "https://tattvasri.com/",
     desktopImage: projectDesktopPath("tattvasri"),
     mobileWebImage: projectMobileWebPath("tattvasri"),
@@ -191,6 +192,7 @@ export const korvaLabsProjects: Project[] = [
     featured: false,
     leadPriority: 30,
     description: "Mobile game product and source-code experience.",
+    proofLine: "Built multiple mobile games for clients across the world",
     appImages: [
       "/projects/mobile-games/candy.webp",
       "/projects/mobile-games/poker.webp",
