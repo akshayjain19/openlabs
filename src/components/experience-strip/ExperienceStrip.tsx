@@ -3,17 +3,11 @@ import { KorvaFrame } from "@/components/ui/KorvaFrame";
 
 export function ProfessionalExperienceIntro() {
   return (
-    <section className="border-t border-white/10 py-20 md:py-28">
+    <section className="border-t border-white/10 py-10 md:py-12">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-        <p className="text-[10px] tracking-[0.35em] text-zinc-600">02 / PROFESSIONAL EXPERIENCE</p>
-        <h2 className="mt-8 max-w-3xl text-[clamp(2.25rem,6vw,4.5rem)] font-semibold leading-[0.92] tracking-[-0.04em]">
-          {experienceCopy.heading.map((line) => (
-            <span key={line} className="block">
-              {line}
-            </span>
-          ))}
+        <h2 className="max-w-[56rem] text-[clamp(0.95rem,1.7vw,1.3rem)] font-semibold leading-snug tracking-[0.02em]">
+          EXPERIENCE ACROSS PRODUCT &amp; TECHNOLOGY TEAMS AT
         </h2>
-        <p className="mt-8 max-w-xl text-sm leading-relaxed text-zinc-500">{experienceCopy.body}</p>
       </div>
     </section>
   );
