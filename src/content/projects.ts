@@ -191,7 +191,10 @@ export const korvaLabsProjects: Project[] = [
     featured: false,
     leadPriority: 30,
     description: "Mobile game product and source-code experience.",
-    appImages: [],
+    appImages: [
+      "/projects/mobile-games/candy.webp",
+      "/projects/mobile-games/poker.webp",
+    ],
     imageAlt: "Mobile games product work",
   },
 ];
