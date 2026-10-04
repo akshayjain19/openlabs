@@ -26,6 +26,8 @@ export function SignatureSection() {
             COMPLICATED THINGS
             <br />
             FEEL SIMPLE.
+            <br />
+            <span className="text-zinc-400">AND SEXY.</span>
           </h2>
           <p className="mt-6 text-[10px] tracking-[0.35em] text-zinc-600">TURN IT ON.</p>
         </div>

@@ -15,7 +15,7 @@ export default function WorkPage() {
   );
 
   return (
-    <div className="pb-24 pt-28 md:pt-32">
+    <div className="pb-16 pt-28 md:pt-32">
       <div className="mx-auto max-w-[1400px] px-5 md:px-8">
         <h1 className="text-[clamp(2.5rem,8vw,6rem)] font-semibold leading-[0.92] tracking-[-0.04em]">
           SELECTED WORK
@@ -23,7 +23,7 @@ export default function WorkPage() {
         <p className="mt-4 max-w-lg text-sm text-zinc-500">Products, platforms and digital experiences.</p>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-8">
         {projects.map((project) => (
           <ProjectShowcase key={project.slug} project={project} />
         ))}

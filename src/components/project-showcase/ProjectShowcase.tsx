@@ -26,10 +26,11 @@ function Title({ project }: { project: Project }) {
 
 function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) {
   const src = project.desktopImage ?? project.image;
-  const maxClass = tall ? "max-h-[min(44vh,480px)]" : "max-h-[min(40vh,440px)]";
+  const mobile = project.mobileImage ?? project.gallery?.[0];
+  const maxClass = tall ? "max-h-[min(43svh,460px)]" : "max-h-[min(40svh,430px)]";
 
   return (
-    <div data-cursor="project" className="group overflow-hidden rounded-sm">
+    <div data-cursor="project" className="group relative overflow-visible rounded-sm">
       <ProjectMediaFrame
         src={src}
         alt={project.imageAlt}
@@ -37,6 +38,15 @@ function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) 
         variant="desktop"
         className={maxClass}
       />
+      <div className="absolute right-2 bottom-2 w-[22%] min-w-[82px] max-w-[132px] md:right-5 md:bottom-5 md:w-[18%] md:max-w-[150px]">
+        <ProjectMediaFrame
+          src={mobile}
+          alt={`${project.imageAlt} — mobile`}
+          fallbackLabel={`${project.name} mobile`}
+          variant="mobile"
+          className="max-h-[min(30svh,300px)]"
+        />
+      </div>
     </div>
   );
 }
@@ -44,7 +54,7 @@ function ProjectVisual({ project, tall }: { project: Project; tall?: boolean }) 
 function MetaBlock({ project }: { project: Project }) {
   return (
     <div>
-      <h3 className="text-[clamp(1.35rem,2.4vw,2.75rem)] font-semibold leading-tight tracking-[-0.03em]">
+      <h3 className="text-[clamp(1.2rem,2vw,2rem)] font-semibold leading-tight tracking-[-0.03em]">
         <Title project={project} />
       </h3>
       <p className="mt-1 text-[10px] tracking-[0.32em] text-zinc-500 uppercase">{project.type}</p>
@@ -67,7 +77,7 @@ export function ProjectShowcase({ project }: Props) {
         : "c";
 
   return (
-    <article className="mx-auto max-w-[1400px] px-5 pb-[56px] md:px-8 md:pb-[80px]">
+    <article className="mx-auto max-w-[1400px] px-5 pb-12 md:px-8 md:pb-14">
       {variant === "a" ? (
         <div className="grid gap-6 md:grid-cols-[minmax(0,0.4fr)_minmax(0,1fr)] md:items-end md:gap-10">
           <MetaBlock project={project} />

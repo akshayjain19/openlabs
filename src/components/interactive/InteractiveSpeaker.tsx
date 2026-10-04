@@ -341,7 +341,7 @@ export function InteractiveSpeaker({ className = "", variant = "section" }: Prop
 
   const sizeClass =
     variant === "hero"
-      ? "min-h-[240px] md:min-h-[300px] lg:min-h-[340px]"
+      ? "min-h-[280px] md:min-h-[360px] lg:min-h-[420px]"
       : "min-h-[min(52vh,480px)] lg:min-h-[min(58vh,560px)]";
 
   return (

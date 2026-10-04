@@ -13,9 +13,9 @@ export function HomePage() {
       <FeaturedWork projects={featured} />
       <ExperienceLogoGrid />
 
-      <section className="border-b border-white/10 py-10 md:py-14">
+      <section className="border-b border-white/10 py-8 md:py-10">
         <div className="mx-auto max-w-[1400px] px-5 md:px-8">
-          <h2 className="max-w-xl text-[clamp(1.35rem,2.8vw,2rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+          <h2 className="max-w-xl text-[clamp(1.3rem,2.6vw,1.9rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
             WE LIKE MAKING
             <br />
             COMPLICATED THINGS

@@ -11,19 +11,19 @@ const InteractiveSpeaker = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="min-h-[240px] w-full bg-transparent md:min-h-[320px]" aria-hidden />
+        <div className="min-h-[280px] w-full bg-transparent md:min-h-[360px]" aria-hidden />
     ),
   },
 );
 
 export function HeroSection() {
   return (
-    <section className="relative border-b border-white/10 bg-[#050505] pt-24 pb-10 md:pt-28 md:pb-14 lg:min-h-[92svh] lg:pb-16 lg:pt-32">
-      <div className="mx-auto grid w-full max-w-[1400px] gap-10 px-5 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-8">
+    <section className="relative border-b border-white/10 bg-[#050505] pt-24 pb-8 md:pt-28 md:pb-12 lg:min-h-[90svh] lg:pb-14 lg:pt-32">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-8 px-5 md:px-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-6">
         <div className="flex flex-col justify-end pb-2 lg:pb-8">
           <HeroHeadline />
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-zinc-500 md:mt-8">
-            Digital products built around your business.
+          <p className="mt-6 max-w-md text-xs leading-relaxed tracking-[0.18em] text-zinc-500 uppercase md:mt-8">
+            DIGITAL PRODUCTS BUILT AROUND YOUR BUSINESS.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center md:mt-10">
             <Link
@@ -42,7 +42,7 @@ export function HeroSection() {
             </Link>
           </div>
         </div>
-        <div className="relative lg:-mt-6 lg:justify-self-end lg:w-full lg:max-w-[520px]">
+        <div className="relative lg:-mt-2 lg:justify-self-end lg:w-full lg:max-w-[560px]">
           <InteractiveSpeaker variant="hero" />
         </div>
       </div>
