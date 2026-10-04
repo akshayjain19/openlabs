@@ -39,21 +39,26 @@ function FeaturedProject({ project }: { project: Project }) {
         <ProjectTitle project={project} />
       </h3>
 
-      <div className="relative mt-3 overflow-visible md:mt-4" data-cursor="project">
-        <ProjectMediaFrame
-          src={desktop}
-          alt={`${project.imageAlt} — desktop`}
-          fallbackLabel={project.name}
-          variant="desktop"
-          className="max-h-[min(38svh,420px)] rounded-sm"
-        />
-        <div className="absolute right-2 bottom-2 w-[23%] min-w-[84px] max-w-[140px] md:right-5 md:bottom-5 md:w-[20%] md:max-w-[160px]">
+      <div
+        className="mt-3 grid items-end gap-3 overflow-visible md:mt-4 md:grid-cols-[minmax(0,0.76fr)_minmax(110px,0.22fr)] md:gap-4"
+        data-cursor="project"
+      >
+        <div className="min-w-0">
+          <ProjectMediaFrame
+            src={desktop}
+            alt={`${project.imageAlt} — web`}
+            fallbackLabel={`${project.name} web image`}
+            variant="desktop"
+            className="max-h-[min(40svh,430px)] rounded-sm"
+          />
+        </div>
+        <div className="w-[34%] min-w-[96px] max-w-[150px] justify-self-end md:w-full md:max-w-[170px] md:-ml-8">
           <ProjectMediaFrame
             src={mobile}
             alt={`${project.imageAlt} — mobile`}
-            fallbackLabel={`${project.name} app`}
+            fallbackLabel={`${project.name} mobile image`}
             variant="mobile"
-            className="max-h-[min(29svh,290px)]"
+            className="max-h-[min(32svh,320px)]"
           />
         </div>
       </div>
