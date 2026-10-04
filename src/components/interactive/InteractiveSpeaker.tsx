@@ -36,9 +36,9 @@ function useGrilleTexture() {
     canvas.height = size;
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
-    ctx.fillStyle = "#141414";
+    ctx.fillStyle = "#151515";
     ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "#0a0a0a";
+    ctx.fillStyle = "#2c2c2c";
     const step = 8;
     const r = 1.2;
     for (let y = step / 2; y < size; y += step) {
@@ -89,16 +89,12 @@ function HardwareButton({ label, position, active, onPress, cursor, onHover }: B
         position={[0, depressed ? -0.008 : 0, 0]}
       >
         <boxGeometry args={[0.16, 0.048, 0.036]} />
-        <meshStandardMaterial
-          color={active ? "#f5f5f5" : "#bdbdbd"}
-          metalness={0.15}
-          roughness={0.55}
-        />
+        <meshStandardMaterial color={active ? "#f7f2e8" : "#24201d"} metalness={0.22} roughness={0.48} />
       </mesh>
       <Text
         position={[0, 0, 0.022]}
         fontSize={0.028}
-        color="#0a0a0a"
+        color={active ? "#0a0a0a" : "#f4efe6"}
         anchorX="center"
         anchorY="middle"
       >
@@ -170,51 +166,51 @@ function SpeakerModel({
   });
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} scale={1.16} rotation={[0.02, -0.08, 0]}>
       <RoundedBox args={[1.35, 0.78, 0.52]} radius={0.06} smoothness={4} castShadow receiveShadow>
-        <meshStandardMaterial color="#0c0c0c" roughness={0.82} metalness={0.08} />
+        <meshStandardMaterial color="#d8d0c1" roughness={0.48} metalness={0.18} />
       </RoundedBox>
 
       <mesh position={[0.68, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
         <planeGeometry args={[0.52, 0.78]} />
-        <meshStandardMaterial color="#111111" roughness={0.9} metalness={0.05} />
+        <meshStandardMaterial color="#b9b0a1" roughness={0.58} metalness={0.18} />
       </mesh>
 
       <mesh ref={grilleRef} position={[0.265, 0, 0.2]}>
         <planeGeometry args={[0.62, 0.52]} />
         <meshStandardMaterial
           map={grilleTex ?? undefined}
-          color="#1a1a1a"
-          roughness={0.95}
-          metalness={0.02}
+          color="#151515"
+          roughness={0.82}
+          metalness={0.12}
         />
       </mesh>
 
       <mesh ref={wooferRef} position={[0.08, -0.06, 0.14]} rotation={[0, 0, 0]}>
         <cylinderGeometry args={[0.18, 0.2, 0.04, 48]} />
-        <meshStandardMaterial color="#e8e8e8" roughness={0.65} metalness={0.05} />
+        <meshStandardMaterial color="#f4efe6" roughness={0.38} metalness={0.18} />
       </mesh>
       <mesh position={[0.08, -0.06, 0.165]}>
         <torusGeometry args={[0.12, 0.012, 12, 48]} />
-        <meshStandardMaterial color="#2a2a2a" roughness={0.4} metalness={0.35} />
+        <meshStandardMaterial color="#111111" roughness={0.35} metalness={0.45} />
       </mesh>
 
       <mesh position={[0.08, 0.2, 0.14]}>
         <cylinderGeometry args={[0.055, 0.06, 0.03, 32]} />
-        <meshStandardMaterial color="#efefef" roughness={0.5} metalness={0.08} />
+        <meshStandardMaterial color="#f8f3ea" roughness={0.36} metalness={0.2} />
       </mesh>
 
       <mesh position={[-0.55, 0.22, 0.18]}>
         <boxGeometry args={[0.22, 0.08, 0.02]} />
-        <meshStandardMaterial color="#080808" roughness={0.85} />
+        <meshStandardMaterial color="#171412" roughness={0.72} metalness={0.12} />
       </mesh>
 
       <mesh ref={ledRef} position={[-0.42, 0.22, 0.2]}>
-        <sphereGeometry args={[0.012, 16, 16]} />
+        <sphereGeometry args={[0.016, 16, 16]} />
         <meshStandardMaterial
-          color={playing ? "#f0f0f0" : "#333333"}
-          emissive={playing ? "#cccccc" : "#111111"}
-          emissiveIntensity={playing ? 0.4 : 0.04}
+          color={playing ? "#c9ffb0" : "#39332c"}
+          emissive={playing ? "#8dff65" : "#15110f"}
+          emissiveIntensity={playing ? 0.9 : 0.08}
           roughness={0.4}
         />
       </mesh>
@@ -267,9 +263,10 @@ function Scene({
 
   return (
     <>
-      <ambientLight intensity={0.45} />
-      <directionalLight position={[3, 4, 5]} intensity={0.85} color="#ffffff" />
-      <directionalLight position={[-4, 2, 3]} intensity={0.25} color="#cccccc" />
+      <ambientLight intensity={0.62} />
+      <directionalLight position={[3, 4, 5]} intensity={1.05} color="#fff7ed" />
+      <directionalLight position={[-4, 2, 3]} intensity={0.42} color="#d7e2ff" />
+      <pointLight position={[0, 0.8, 1.6]} intensity={0.35} color="#ffffff" />
       <SpeakerModel
         pointer={pointer}
         playing={playing}
@@ -299,7 +296,7 @@ function SpeakerCanvas({
 }) {
   return (
     <Canvas
-      camera={{ position: [0, 0.05, 2.35], fov: 38 }}
+      camera={{ position: [0, 0.03, 1.9], fov: 34 }}
       dpr={[1, dpr]}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}

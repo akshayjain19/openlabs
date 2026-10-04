@@ -137,15 +137,60 @@ body.custom-cursor-active button {
   animation-duration: 48s;
 }
 
+.logo-marquee {
+  overflow: hidden;
+  outline: none;
+  white-space: nowrap;
+}
+
+.logo-marquee-track {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  animation: logo-marquee 44s linear infinite;
+}
+
+.logo-marquee:hover .logo-marquee-track,
+.logo-marquee:focus .logo-marquee-track,
+.logo-marquee:focus-within .logo-marquee-track {
+  animation-play-state: paused;
+}
+
+.logo-marquee-item {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding-right: clamp(1.75rem, 4vw, 4.25rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
     flex-wrap: wrap;
     white-space: normal;
   }
+
+  .logo-marquee {
+    white-space: normal;
+  }
+
+  .logo-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+  }
 }
 
 @keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes logo-marquee {
   from {
     transform: translateX(0);
   }
