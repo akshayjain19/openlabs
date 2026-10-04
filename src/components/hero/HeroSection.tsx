@@ -1,20 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { whatsAppLink } from "@/lib/utils";
 import { HeroHeadline } from "@/components/home/HeroHeadline";
-
-const InteractiveSpeaker = dynamic(
-  () => import("@/components/interactive/InteractiveSpeaker").then((m) => m.InteractiveSpeaker),
-  {
-    ssr: false,
-    loading: () => (
-        <div className="min-h-[280px] w-full bg-transparent md:min-h-[360px]" aria-hidden />
-    ),
-  },
-);
+import { InteractiveSpeaker } from "@/components/interactive/InteractiveSpeaker";
 
 export function HeroSection() {
   return (
